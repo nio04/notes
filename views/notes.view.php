@@ -9,7 +9,9 @@
   <?php loadPartials("sidebar") ?>
 
   <!-- Right Content Area  -->
-  <div class="ml-auto w-2/3 bg-white p-4"></div>
-</div>
+  <div class="ml-auto w-2/3 bg-white p-4">
 
-<?php loadPartials("footer") ?>
+
+  </div>
+
+  <?php loadPartials("footer") ?>
