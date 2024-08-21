@@ -4,9 +4,8 @@
 <?php loadPartials("nav") ?>
 
 <!-- Main container -->
-<div class="flex h-screen pt-16">
+<div class="flex pt-16">
 
-  <!-- Left Sidebar -->
   <?php loadPartials("sidebar") ?>
 
   <!-- Right Content Area  -->
