@@ -24,7 +24,6 @@ class RegisterController extends Controller {
     $password = $_POST['password'];
     $passwordConfirm = $_POST['password_confirm'];
 
-
     // sanitize
     list($firstName, $lastName, $username, $email, $dob, $mobile, $password, $passwordConfirm) = $this->sanitize([$firstName, $lastName, $username, $email, $dob, $mobile, $password, $passwordConfirm]);
 
