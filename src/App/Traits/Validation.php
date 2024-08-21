@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Models\User;
+
 /**
  * Trait ValidationTrait
  * 
@@ -195,8 +197,21 @@ trait Validation {
     return false;
   }
 
-  function passwordMatches($pass1, $pass2) {
+  function passwordMatches(string $pass1, string $pass2) {
     return $pass1 === $pass2 ? true : false;
+  }
+
+  function checkAlreadyExist(array $datas) {
+    $errors = [];
+
+    $user = new User();
+    $user->getUsername($datas['username']) ?  $errors[] = 'username already found' : [];
+
+    $user->getEmail($datas['email']) ?  $errors[] = 'email already found' : [];
+
+    $user->getMobile($datas['mobile']) ? $errors[] = 'mobile number already found' : [];
+
+    return empty($errors) ? false : $errors;
   }
 
   function handleFileUpload($file, $targetDir, $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'pdf']) {

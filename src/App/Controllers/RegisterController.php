@@ -47,11 +47,17 @@ class RegisterController extends Controller {
     $passwordMatches = $this->passwordMatches($password, $passwordConfirm);
 
     if ($passwordMatches === false) {
-      return $this->render("register", ['errors' => ['password did not matched, please try again', 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]]);
+      return $this->render("register", ['errors' => ['password did not matched, please try again'], 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
     }
 
     // validate & move profile picture
     $this->handleFileUpload($profilePicture, 'uploads/users/profilePictures/');
+
+    // check if username, email, mobile already exist
+    $exist = $this->checkAlreadyExist(['username' => $username, 'email' => $email, 'mobile' => $mobile]);
+    if ($exist) {
+      return $this->render("register", ['errors' => $exist, 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
+    }
 
     // register to db
     $register = new RegisterHandle();
