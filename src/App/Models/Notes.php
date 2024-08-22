@@ -7,6 +7,15 @@ use App\Traits\Database;
 class Notes {
   use Database;
 
+  function getShortNotes($user_id) {
+    $data = ['user_id' => $user_id];
+
+    return $this->query("SELECT id, title, version FROM notes WHERE user_id = :user_id", $data);
+  }
+
+  function getNote() {
+  }
+
   function getTitle(string $title) {
     $data = ['title' => $title];
     return $this->query("SELECT title FROM notes WHERE title = :title", $data);
