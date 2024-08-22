@@ -27,4 +27,9 @@ class Notes {
   function upload(array $data) {
     return $this->query("INSERT INTO notes (user_id, title, description, keywords, attachment, version) VALUES (:user_id, :title, :description, :keywords, :attachment, :version)", $data);
   }
+
+  function deleteNote($id) {
+    $data = ["id" => (int) $id];
+    return $this->query("DELETE FROM notes WHERE id = :id", $data);
+  }
 }
