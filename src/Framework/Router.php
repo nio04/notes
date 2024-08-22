@@ -109,6 +109,11 @@ class Router {
       'action' => 'index',
       'httpMethod' => 'get'
     ];
+    $this->routes['/notes/upload'] = [
+      'controller' => NoteUpdateController::class,
+      'action' => 'upload',
+      'httpMethod' => 'post'
+    ];
   }
 
   /**

@@ -48,7 +48,7 @@ class NoteCreateController extends Controller {
     }
 
     // insert to table
-    $note->upload(['user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment['name'], 'version' => 0]);
+    $note->upload(['user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment['name']]);
 
     redirect("");
   }

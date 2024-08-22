@@ -16,23 +16,28 @@
       <h2 class="text-4xl font-bold text-gray-800 mb-6">Update Note</h2>
 
       <!-- Update Note Form -->
-      <form>
+      <form action="/notes/upload" method="post">
+
+        <?php loadPartials("errors", ['errors' => $errors ?? []]) ?>
+
+        <input type="hidden" name="id" value="<?= $id ?>">
+
         <!-- Title Input -->
         <div class="mb-4">
           <label for="title" class="block text-lg font-medium text-gray-700 mb-2">Title</label>
-          <input type="text" id="title" name="title" class="w-full p-3 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" value="<?= $note->title ?? "" ?>">
+          <input type="text" id="title" name="title" class="w-full p-3 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" value="<?= $title ?? "" ?>">
         </div>
 
         <!-- Description Input -->
         <div class="mb-4">
           <label for="description" class="block text-lg font-medium text-gray-700 mb-2">Description</label>
-          <textarea id="description" name="description" rows="4" class="w-full p-3 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"><?= $note->description ?? "" ?></textarea>
+          <textarea id="description" name="description" rows="4" class="w-full p-3 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"><?= $description ?? "" ?></textarea>
         </div>
 
         <!-- Keywords Input -->
         <div class="mb-4">
           <label for="keywords" class="block text-lg font-medium text-gray-700 mb-2">Keywords</label>
-          <input type="text" id="keywords" name="keywords" class="w-full p-3 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" value="<?= $note->keywords ?? "" ?>">
+          <input type="text" id="keywords" name="keywords" class="w-full p-3 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" value="<?= $keywords ?? "" ?>">
         </div>
 
         <!-- File Attachment Input -->

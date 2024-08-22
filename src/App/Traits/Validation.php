@@ -201,6 +201,11 @@ trait Validation {
     return $pass1 === $pass2 ? true : false;
   }
 
+  /**
+   * check if already exist for registering user
+   * @param array $datas
+   * @return bool|string[]
+   */
   function checkAlreadyExist(array $datas) {
     $errors = [];
 
@@ -210,6 +215,21 @@ trait Validation {
     $user->getEmail($datas['email']) ?  $errors[] = 'email already found' : [];
 
     $user->getMobile($datas['mobile']) ? $errors[] = 'mobile number already found' : [];
+
+    return empty($errors) ? false : $errors;
+  }
+
+  /**
+   * check if note update valid
+   */
+  function checkIfUdated($title, $description, $keywords) {
+    $errors = [];
+    $oldTitle = $this->getSession(['note', 'title']);
+    $oldDescription = $this->getSession(['note', 'description']);
+    $oldKeywords = $this->getSession(['note', 'keywords']);
+
+    if ($title === $oldTitle && $description === $oldDescription && $keywords === $oldKeywords)
+      $errors[] = "no changes were made. unable to upload the edit.";
 
     return empty($errors) ? false : $errors;
   }
