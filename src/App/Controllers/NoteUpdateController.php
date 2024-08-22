@@ -12,7 +12,7 @@ class NoteUpdateController extends Controller {
   function index() {
     if ($this->isLoggedIn) {
 
-      return $this->render("noteUpdate", ['username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage]);
+      return $this->render("noteUpdate", ['username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes]);
     } else {
       return $this->render("login");
     }
