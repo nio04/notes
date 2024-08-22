@@ -3,11 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Traits\Session;
 use App\Traits\Validation;
 use Core\Controller;
 
 class LoginController extends Controller {
   use Validation;
+  use Session;
 
   function index() {
     $this->render("login");
@@ -39,6 +41,9 @@ class LoginController extends Controller {
       $passwordVerify = password_verify($password, $user[0]->password);
 
       if ($passwordVerify === true) {
+        // save the user in session [got only username, password]
+        $this->setSession(['user'], $user[0]);
+
         redirect("notes");
       } else {
         return $this->render("login", ['errors' => ['username or password is incorrect']]);
