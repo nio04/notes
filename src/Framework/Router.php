@@ -87,9 +87,9 @@ class Router {
       'httpMethod' => 'get'
     ];
     $this->routes['/notes/save'] = [
-      'controller' => NoteController::class,
-      'action' => 'index',
-      'httpMethod' => 'get'
+      'controller' => NoteCreateController::class,
+      'action' => 'save',
+      'httpMethod' => 'post'
     ];
   }
 

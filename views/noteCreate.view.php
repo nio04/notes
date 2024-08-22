@@ -16,23 +16,26 @@
       <h2 class="text-3xl font-bold text-gray-800 mb-6">Create Note</h2>
 
       <!-- Form -->
-      <form action="#" method="POST" enctype="multipart/form-data">
+      <form action="/notes/save" method="POST" enctype="multipart/form-data">
+
+        <?php loadPartials("errors", ['errors' => $errors]) ?>
+
         <!-- Title Input -->
         <div class="mb-6">
           <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-          <input type="text" id="title" name="title" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter note title">
+          <input type="text" id="title" name="title" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter note title" value="<?= $title ?? "" ?>">
         </div>
 
         <!-- Description Textarea -->
         <div class="mb-6">
           <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-          <textarea id="description" name="description" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter note description"></textarea>
+          <textarea id="description" name="description" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter note description"><?= $description ?? "" ?></textarea>
         </div>
 
         <!-- Keywords Input -->
         <div class="mb-6">
           <label for="keywords" class="block text-sm font-medium text-gray-700">Keywords</label>
-          <input type="text" id="keywords" name="keywords" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter keywords">
+          <input type="text" id="keywords" name="keywords" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter keywords" value="<?= $keywords ?? "" ?>">
         </div>
 
         <!-- File Attachment -->
