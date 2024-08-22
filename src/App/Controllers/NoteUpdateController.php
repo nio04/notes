@@ -55,6 +55,8 @@ class NoteUpdateController extends Controller {
     $note = new Notes();
     $note->save(['id' => (int)$id, 'user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
 
+    // clear note from session
+    $this->removeSession('note');
     redirect("");
   }
 }
