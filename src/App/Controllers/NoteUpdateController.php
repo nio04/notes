@@ -9,10 +9,14 @@ use Core\Controller;
 class NoteUpdateController extends Controller {
   use Session;
 
-  function index() {
+  function index($id) {
     if ($this->isLoggedIn) {
 
-      return $this->render("noteUpdate", ['username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes]);
+      // get note details
+      $note = new Notes();
+      $note = $note->getNote($id);
+
+      return $this->render("noteUpdate", ['username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'note' => $note[0]]);
     } else {
       return $this->render("login");
     }

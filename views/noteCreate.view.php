@@ -46,7 +46,7 @@
 
         <!-- Buttons -->
         <div class="flex justify-end space-x-4">
-          <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">Close View</button>
+          <a href="/notes" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">Close Create View</a>
           <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Create Note</button>
         </div>
       </form>
