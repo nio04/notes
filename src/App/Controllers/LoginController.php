@@ -41,7 +41,10 @@ class LoginController extends Controller {
       $passwordVerify = password_verify($password, $user[0]->password);
 
       if ($passwordVerify === true) {
-        // save the user in session [got only username, password]
+        // save the user in session 
+        $user = new User();
+        $user = $user->getUser($username);
+
         $this->setSession(['user'], $user[0]);
 
         redirect("notes");

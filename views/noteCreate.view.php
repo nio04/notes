@@ -18,7 +18,7 @@
       <!-- Form -->
       <form action="/notes/save" method="POST" enctype="multipart/form-data">
 
-        <?php loadPartials("errors", ['errors' => $errors]) ?>
+        <?php loadPartials("errors", ['errors' => $errors ?? []]) ?>
 
         <!-- Title Input -->
         <div class="mb-6">

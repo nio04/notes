@@ -42,7 +42,7 @@ class RegisterController extends Controller {
       return $this->render("register", ['errors' => $validateFields, 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
     }
 
-    // check if passwrd matches
+    // check if password matches
     $passwordMatches = $this->passwordMatches($password, $passwordConfirm);
 
     if ($passwordMatches === false) {
