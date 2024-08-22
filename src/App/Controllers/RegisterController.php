@@ -55,7 +55,7 @@ class RegisterController extends Controller {
 
     // register to db
     $register = new RegisterHandle();
-    $register->save(['first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'dob' => $dob, 'mobile' => (int) $mobile, 'profile_picture' => $profilePicture['name'], 'password' => $password]);
+    $register->save(['first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'dob' => $dob, 'mobile' => (int) $mobile, 'profile_picture' => $profilePicture['name'], 'password' =>  password_hash($password, PASSWORD_BCRYPT)]);
 
     redirect('login');
   }
