@@ -10,7 +10,7 @@ class User {
   function getUser($username) {
     $data = ['username' => $username];
 
-    return $this->query('SELECT id, username FROM users WHERE username = :username', $data);
+    return $this->query('SELECT id, username, profile_picture FROM users WHERE username = :username', $data);
   }
 
   function getUserbyUsername($username) {
