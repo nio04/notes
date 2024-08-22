@@ -47,4 +47,9 @@ class Notes {
     echo ("</pre>");
     return $this->query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
   }
+
+  function getOldNotes($id) {
+    $data = ["notes_id" => (int) $id];
+    return $this->query("SELECT id, title, created_at FROM old_notes WHERE notes_id = :notes_id", $data);
+  }
 }

@@ -54,9 +54,6 @@ class NoteUpdateController extends Controller {
     // upload to table [curren(new)note]
     $note = new Notes();
     $note->save(['id' => (int)$id, 'user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
-    echo ("<pre>");
-    var_dump($this->getSession(['note', 'user_id']));
-    echo ("</pre>");
 
     // upload to old_notes table (old note)
     $note->saveToOldNotes(['users_id' => $this->getSession(['note', 'user_id']), 'notes_id' => $this->getSession(['note', 'id']), 'title' => $this->getSession(['note', 'title']), 'description' => $this->getSession(['note', 'description']), 'keywords' => $this->getSession(['note', 'keywords']), 'attachment' => $this->getSession(['note', 'attachment'])]);
