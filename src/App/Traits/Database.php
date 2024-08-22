@@ -43,9 +43,6 @@ trait Database {
    */
   public function query(string $sql, array $params = []) {
     try {
-      echo ("<pre>");
-      var_dump($sql);
-      echo ("</pre>");
       $stmt = $this->getDb()->prepare($sql);
 
       foreach ($params as $key => $value) {

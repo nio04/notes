@@ -5,7 +5,7 @@ namespace Framework;
 use App\Controllers\HomeController;
 use App\Controllers\RegisterController;
 use App\Controllers\LoginController;
-
+use App\Controllers\NoteController;
 
 /**
  * The `Router` class is responsible for handling and dispatching HTTP requests to the appropriate
@@ -72,6 +72,13 @@ class Router {
       'controller' => RegisterController::class,
       'action' => 'submit',
       'httpMethod' => 'post'
+    ];
+
+    // notes
+    $this->routes['/notes'] = [
+      'controller' => NoteController::class,
+      'action' => 'index',
+      'httpMethod' => 'get'
     ];
   }
 
