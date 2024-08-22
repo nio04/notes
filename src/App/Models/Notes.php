@@ -41,4 +41,10 @@ class Notes {
   function save($data) {
     return $this->query("UPDATE notes SET user_id = :user_id, title = :title, description = :description, keywords = :keywords, attachment = :attachment WHERE id = :id ", $data);
   }
+  function saveToOldNotes($data) {
+    echo ("<pre>");
+    var_dump($data);
+    echo ("</pre>");
+    return $this->query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
+  }
 }
