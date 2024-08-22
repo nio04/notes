@@ -1,11 +1,3 @@
-<?php
-
-echo ("<pre>");
-var_dump($isLoggedIn);
-echo ("</pre>");
-
-?>
-
 <?php loadPartials("header") ?>
 
 <!-- Navigation Bar -->

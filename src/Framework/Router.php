@@ -6,6 +6,7 @@ use App\Controllers\HomeController;
 use App\Controllers\RegisterController;
 use App\Controllers\LoginController;
 use App\Controllers\NoteController;
+use App\Controllers\NoteCreateController;
 
 /**
  * The `Router` class is responsible for handling and dispatching HTTP requests to the appropriate
@@ -76,6 +77,16 @@ class Router {
 
     // notes
     $this->routes['/notes'] = [
+      'controller' => NoteController::class,
+      'action' => 'index',
+      'httpMethod' => 'get'
+    ];
+    $this->routes['/notes/create'] = [
+      'controller' => NoteCreateController::class,
+      'action' => 'index',
+      'httpMethod' => 'get'
+    ];
+    $this->routes['/notes/save'] = [
       'controller' => NoteController::class,
       'action' => 'index',
       'httpMethod' => 'get'
