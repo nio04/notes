@@ -9,18 +9,6 @@ namespace App\Traits;
  * getting, setting, checking, removing session data, and managing session lifecycle.
  */
 trait Session {
-
-  /**
-   * Start the session if not already started.
-   *
-   * This method ensures that the session is started. It is called internally
-   * by other methods to ensure session availability.
-   *
-   * Example Usage:
-   * ```php
-   * $this->startSession();
-   * ```
-   */
   public function startSession(): void {
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
