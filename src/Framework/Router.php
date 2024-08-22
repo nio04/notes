@@ -8,6 +8,7 @@ use App\Controllers\LoginController;
 use App\Controllers\NoteController;
 use App\Controllers\NoteCreateController;
 use App\Controllers\NoteDeleteController;
+use App\Controllers\NoteUpdateController;
 use App\Controllers\NoteViewController;
 
 /**
@@ -100,6 +101,11 @@ class Router {
     ];
     $this->routes['/notes/delete'] = [
       'controller' => NoteDeleteController::class,
+      'action' => 'index',
+      'httpMethod' => 'get'
+    ];
+    $this->routes['/notes/update'] = [
+      'controller' => NoteUpdateController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];

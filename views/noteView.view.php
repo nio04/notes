@@ -22,7 +22,12 @@ $keywords = explode(", ", $keywords);
 
       <!-- Top Right Buttons (Update & Delete) -->
       <div class="flex justify-end space-x-4 mb-6">
-        <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300">Update</button>
+        <a
+          href="/notes/update"
+          class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300">
+          Update
+        </a>
+
         <a
           href="/notes/delete/<?= $note->id ?>"
           class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
