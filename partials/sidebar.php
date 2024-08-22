@@ -6,14 +6,21 @@
       </a>
     </div>
   <?php endif ?>
-  <!-- Notes Container -->
-  <div class="overflow-y-auto flex-grow mb-24">
-    <?php foreach ($notes as $note): ?>
-      <a href="/notes/view/<?= $note->id ?>" class="block">
-        <div class="bg-white p-4 rounded-lg shadow mb-4">
-          <h3 class="font-semibold text-gray-700"><?= $note->title ?></h3>
-        </div>
-      </a>
-    <?php endforeach ?>
+
+  <div class="overflow-y-auto flex-grow mb-24 flex flex-col">
+    <?php if (empty($notes)): ?>
+      <div class="bg-gray-100 p-4 rounded-lg shadow mb-4 mt-auto w-full">
+        <h3 class="font-semibold text-gray-400 text-center">No notes were found</h3>
+      </div>
+    <?php else: ?>
+      <?php foreach ($notes as $note): ?>
+        <a href="/notes/view/<?= $note->id ?>" class="block">
+          <div class="bg-white p-4 rounded-lg shadow mb-4">
+            <h3 class="font-semibold text-gray-700"><?= $note->title ?></h3>
+          </div>
+        </a>
+      <?php endforeach ?>
+    <?php endif; ?>
   </div>
+
 </div>

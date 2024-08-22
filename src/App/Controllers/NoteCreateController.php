@@ -33,7 +33,7 @@ class NoteCreateController extends Controller {
      * and if title have content, then description can be empty
      */
     if (strlen(trim($description)) > 0 && strlen(trim($title)) === 0) {
-      return $this->render('noteCreate', ['errors' => ['title can not be empty!'], 'description' => $description, 'keywords' => $keywords]);
+      return $this->render('noteCreate', ['errors' => ['title can not be empty!'], 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'description' => $description, 'keywords' => $keywords]);
     }
 
     // validate attachment
@@ -44,7 +44,7 @@ class NoteCreateController extends Controller {
     $titleExist = $note->getTitle($title);
 
     if ($titleExist) {
-      return $this->render('noteCreate', ['errors' => ['this title is already in use!'], 'title' => $title, 'description' => $description, 'keywords' => $keywords]);
+      return $this->render('noteCreate', ['errors' => ['this title is already in use!'], 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords]);
     }
 
     // insert to table
