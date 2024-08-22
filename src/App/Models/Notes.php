@@ -13,7 +13,10 @@ class Notes {
     return $this->query("SELECT id, title, version FROM notes WHERE user_id = :user_id", $data);
   }
 
-  function getNote() {
+  function getNote($id) {
+    $data = ["id" => (int) $id];
+
+    return $this->query("SELECT * FROM notes WHERE id = :id", $data);
   }
 
   function getTitle(string $title) {

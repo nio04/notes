@@ -8,7 +8,7 @@
   <!-- Notes Container -->
   <div class="overflow-y-auto flex-grow mb-24">
     <?php foreach ($notes as $note): ?>
-      <a href="/note/view/<?= $note->id ?>" class="block">
+      <a href="/notes/view/<?= $note->id ?>" class="block">
         <div class="bg-white p-4 rounded-lg shadow mb-4">
           <h3 class="font-semibold text-gray-700"><?= $note->title ?></h3>
         </div>

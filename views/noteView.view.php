@@ -1,3 +1,10 @@
+<?php
+
+$keywords = $note->keywords ?? "";
+$keywords = explode(", ", $keywords);
+
+?>
+
 <?php loadPartials("header") ?>
 
 <!-- Navigation Bar -->
@@ -6,7 +13,7 @@
 <!-- Main container -->
 <div class="flex pt-16">
 
-  <?php loadPartials("sidebar") ?>
+  <?php loadPartials("sidebar", ["notes" => $notes]) ?>
 
   <!-- Right Content Area  -->
   <div class="ml-auto w-2/3 bg-white p-4">
@@ -20,23 +27,23 @@
       </div>
 
       <!-- Note Title -->
-      <h2 class="text-4xl font-bold text-gray-800 mb-4">Note Title</h2>
+      <h2 class="text-4xl font-bold text-gray-800 mb-4"><?= $note->title ?></h2>
 
       <!-- Note Description -->
-      <p class="text-gray-700 text-lg leading-relaxed mb-6">
-        This is the description of the note. It can be a detailed explanation of the note content.
+      <p class="text-gray-700 text-lg leading-relaxed mb-6 pl-8">
+        <?= $note->description ?>
       </p>
 
       <!-- Keywords Section -->
-      <div class="mb-6">
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">Keywords:</h3>
-        <span class="inline-block bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Keyword 1</span>
-        <span class="inline-block bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Keyword 2</span>
-        <span class="inline-block bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Keyword 3</span>
+      <div class="my-12 mt-20">
+        <h3 class="text-sm font-semibold text-gray-800 mb-2">Keywords:</h3>
+        <?php foreach ($keywords as $keyword): ?>
+          <span class="inline-block bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"><?= $keyword ?></span>
+        <?php endforeach ?>
       </div>
 
       <!-- Attachment Placeholder -->
-      <div class="mb-6">
+      <div class="mb-6 mt-20">
         <h3 class="text-xl font-semibold text-gray-800 mb-2">Attachments:</h3>
         <div class="h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
           No attachments uploaded

@@ -13,10 +13,7 @@ class HomeController extends Controller {
   function index() {
 
     if ($this->isLoggedIn) {
-      $notes = new Notes();
-      $shortNotes = $notes->getShortNotes($this->getSession(['user', 'id']));
-
-      $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'notes' => $shortNotes]);
+      $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'notes' => $this->shortNotes]);
     } else {
       $this->render("login");
     }
