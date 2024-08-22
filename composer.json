@@ -1,0 +1,19 @@
+{
+    "name": "admin/notes",
+    "autoload": {
+        "psr-4": {
+            "App\\Controllers\\": "src/App/Controllers/",
+            "App\\Models\\": "src/App/Models/",
+            "App\\Traits\\": "src/App/Traits/",
+            "Core\\": "src/core/",
+            "Framework\\": "src/Framework/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nio04",
+            "email": "nishatislam3108@gmail.com"
+        }
+    ],
+    "require": {}
+}
