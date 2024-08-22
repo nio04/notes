@@ -16,3 +16,7 @@ function loadPartials(string $file, array $data = []) {
 function redirect($path) {
   header("location: /" . $path);
 }
+
+function loadPicture($fileName) {
+  require "/uploads/" . $fileName;
+}

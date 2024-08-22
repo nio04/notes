@@ -8,7 +8,7 @@ $keywords = explode(", ", $keywords);
 <?php loadPartials("header") ?>
 
 <!-- Navigation Bar -->
-<?php loadPartials("nav") ?>
+<?php loadPartials("nav", ["username" => $username, 'profile_picture' => $profile_picture]) ?>
 
 <!-- Main container -->
 <div class="flex pt-16">

@@ -16,7 +16,7 @@ class NoteViewController extends Controller {
       $note = new Notes();
       $note = $note->getNote($id);
 
-      return $this->render("noteView", ['notes' => $this->shortNotes, 'note' => $note[0]]);
+      return $this->render("noteView", ['username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $note[0]]);
     } else {
       return $this->render("login");
     }

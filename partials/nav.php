@@ -6,9 +6,7 @@
 
   <!-- Right side profile section -->
   <div class="flex items-center space-x-4">
-    <!-- Username placeholder -->
-    <span class="text-white">Username</span>
-    <!-- User avatar -->
+    <span class="text-white"><?= $username ?></span>
     <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
       <img src="https://via.placeholder.com/150" alt="User Avatar" class="w-full h-full object-cover">
     </div>

@@ -12,7 +12,7 @@ class NoteController extends Controller {
   function index() {
     if ($this->isLoggedIn) {
 
-      return $this->render("notes");
+      return $this->render("notes", ['username' => $this->username, 'profile_picture' => $this->profile_picture]);
     } else {
       return $this->render("login");
     }
