@@ -12,6 +12,7 @@ class Controller extends View {
   protected $shortNotes;
   protected $username;
   protected $profile_picture;
+  protected $isNoteCreatePage;
 
   function __construct() {
     $notes = new Notes();
@@ -19,5 +20,6 @@ class Controller extends View {
     $this->username = $this->getSession(['user', 'username']);
     $this->profile_picture = $this->getSession(['user', 'profile_picture']);
     $this->shortNotes = $notes->getShortNotes($this->getSession(['user', 'id']));
+    $this->isNoteCreatePage = $_SERVER['REQUEST_URI'] === "/notes/create";
   }
 }

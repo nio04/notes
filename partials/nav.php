@@ -1,7 +1,7 @@
 <nav class="bg-blue-600 p-4 flex justify-between items-center fixed top-0 w-full z-10">
   <!-- Left side link -->
   <div class="text-yellow-400 text-xl font-semibold">
-    <a href="#">Notishes</a>
+    <a href="/">Notishes</a>
   </div>
 
   <!-- Right side profile section -->

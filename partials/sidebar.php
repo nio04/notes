@@ -1,10 +1,11 @@
 <div class="w-1/3 bg-gray-200 p-4 fixed h-full flex flex-col justify-between">
-  <div class="m-8">
-    <a href="/notes/create" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 block text-center">
-      Create a New Note
-    </a>
-  </div>
-
+  <?php if (!$isNoteCreatePage ?? ''): ?>
+    <div class="m-8">
+      <a href="/notes/create" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 block text-center">
+        Create a New Note
+      </a>
+    </div>
+  <?php endif ?>
   <!-- Notes Container -->
   <div class="overflow-y-auto flex-grow mb-24">
     <?php foreach ($notes as $note): ?>

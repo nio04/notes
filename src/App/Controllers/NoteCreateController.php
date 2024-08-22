@@ -11,7 +11,7 @@ class NoteCreateController extends Controller {
 
   function index() {
     if ($this->isLoggedIn) {
-      return $this->render("noteCreate", ['username' => $this->username, 'profile_picture' => $this->profile_picture]);
+      return $this->render("noteCreate", ['username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'isNoteCreatePage' => $this->isNoteCreatePage]);
     } else {
       return $this->render("login");
     }
