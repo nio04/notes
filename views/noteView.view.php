@@ -51,33 +51,37 @@ $keywords = explode(", ", $keywords);
       </div>
 
       <!-- Close Editor Button -->
-      <div class="flex justify-center mb-10">
-        <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300">Close View</button>
+      <a href="/" class="block">
+        <div class="flex justify-center mb-10">
+          <div class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300">
+            Close View
+          </div>
+        </div>
+      </a>
+
+
+      <!-- Old Notes Version Container -->
+      <div class="p-8 bg-white rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
+
+        <!-- Old Versions List (Scrollable) -->
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Old Versions</h3>
+        <div class="max-h-40 overflow-y-auto">
+          <ul class="space-y-2">
+            <li class="bg-gray-100 text-gray-800 p-4 rounded-lg flex justify-between">
+              <span class="font-semibold text-gray-600">title 1 (v1)</span>
+              <span class="text-gray-500 text-sm">Created on: 2023-08-01</span>
+            </li>
+            <li class="bg-gray-100 text-gray-800 p-4 rounded-lg flex justify-between">
+              <span class="font-semibold text-gray-600">title 2 (v2)</span>
+              <span class="text-gray-500 text-sm">Created on: 2023-08-02</span>
+            </li>
+            <li class="bg-gray-100 text-gray-800 p-4 rounded-lg flex justify-between">
+              <span class="font-semibold text-gray-600">title 3 (v3)</span>
+              <span class="text-gray-500 text-sm">Created on: 2023-08-03</span>
+            </li>
+            <!-- Add more versions as needed -->
+          </ul>
+        </div>
       </div>
     </div>
-
-    <!-- Old Notes Version Container -->
-    <div class="p-8 bg-white rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
-
-      <!-- Old Versions List (Scrollable) -->
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">Old Versions</h3>
-      <div class="max-h-40 overflow-y-auto">
-        <ul class="space-y-2">
-          <li class="bg-gray-100 text-gray-800 p-4 rounded-lg flex justify-between">
-            <span class="font-semibold text-gray-600">title 1 (v1)</span>
-            <span class="text-gray-500 text-sm">Created on: 2023-08-01</span>
-          </li>
-          <li class="bg-gray-100 text-gray-800 p-4 rounded-lg flex justify-between">
-            <span class="font-semibold text-gray-600">title 2 (v2)</span>
-            <span class="text-gray-500 text-sm">Created on: 2023-08-02</span>
-          </li>
-          <li class="bg-gray-100 text-gray-800 p-4 rounded-lg flex justify-between">
-            <span class="font-semibold text-gray-600">title 3 (v3)</span>
-            <span class="text-gray-500 text-sm">Created on: 2023-08-03</span>
-          </li>
-          <!-- Add more versions as needed -->
-        </ul>
-      </div>
-    </div>
-  </div>
-  <?php loadPartials("footer") ?>
+    <?php loadPartials("footer") ?>
