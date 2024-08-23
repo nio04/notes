@@ -9,7 +9,7 @@
   <?php loadPartials("sidebar", ['notes' => $notes ?? [], 'isNoteCreatePage' => $isNoteCreatePage, 'page' => $page, 'perPage' => $perPage, 'totalNotes' => $totalNotes]) ?>
 
   <!-- Right Content Area  -->
-  <div class="ml-auto w-2/3 bg-white p-6 h-screen">
+  <div class="ml-auto w-2/3 bg-white p-6 pb-6">
     <!-- Notes Listing -->
     <?php if (empty($notes)): ?>
       <div class="bg-gray-100 p-6 rounded-lg shadow mb-6 text-center">
@@ -29,7 +29,7 @@
 
       <!-- Load More Button -->
       <?php if ($page * $perPage < $totalNotes): ?>
-        <div class="text-center mt-6">
+        <div class="text-center mt-12">
           <button id="loadMoreBtnRight" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
             Load More
           </button>
