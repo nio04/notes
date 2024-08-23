@@ -13,7 +13,7 @@ class HomeController extends Controller {
   function index() {
 
     if ($this->isLoggedIn) {
-      $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'isNoteCreatePage' => $this->isNoteCreatePage, 'page' => $this->page, 'perPage' => $this->perPage, 'totalNotes' => $this->totalNotes]);
+      $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'isNoteCreatePage' => $this->isNoteCreatePage, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     } else {
       $this->render("login");
     }

@@ -17,9 +17,9 @@ class NoteViewController extends Controller {
       // get the note
       $note = new Notes();
       $singleNote = $note->getNote($id);
-      $oldNotes = $note->getOldNotesFromSideBar($id);
+      $oldNotes = $note->getOldNotesFromSideBar($id, $this->limit, $this->offset);
 
-      return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? []]);
+      return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     } else {
       return $this->render("login");
     }
@@ -33,9 +33,9 @@ class NoteViewController extends Controller {
       // get the note
       $note = new Notes();
       $singleNote = $note->getSingleOldNote($oldNoteId);
-      $oldNotes = $note->getOldNotes($notes_id, $oldNoteId);
+      $oldNotes = $note->getOldNotes($notes_id, $oldNoteId, $this->limit, $this->offset);
 
-      return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? []]);
+      return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     } else {
       return $this->render("login");
     }

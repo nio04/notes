@@ -28,7 +28,7 @@ class NoteUpdateController extends Controller {
       $keywords = $note[0]->keywords;
 
 
-      return $this->render("noteUpdate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'id' => $id, 'title' => $title, 'description' => $description, 'keywords' => $keywords]);
+      return $this->render("noteUpdate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'id' => $id, 'title' => $title, 'description' => $description, 'keywords' => $keywords,, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     } else {
       return $this->render("login");
     }
@@ -48,7 +48,7 @@ class NoteUpdateController extends Controller {
     $contentUpdated =  $this->checkIfUdated($title, $description, $keywords);
 
     if (is_array($contentUpdated)  && isset($contentUpdated[0])) {
-      return $this->render("noteUpdate", ['errors' => $contentUpdated, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'title' => $title, 'description' => $description, 'keywords' => $keywords,]);
+      return $this->render("noteUpdate", ['errors' => $contentUpdated, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // upload to table [curren(new)note]

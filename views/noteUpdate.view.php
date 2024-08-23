@@ -6,7 +6,7 @@
 <!-- Main container -->
 <div class="flex pt-16">
 
-  <?php loadPartials("sidebar", ['isNoteCreatePage' => $isNoteCreatePage, 'notes' => $notes]) ?>
+  <?php loadPartials("sidebar", ['isNoteCreatePage' => $isNoteCreatePage, 'notes' => $notes, 'page' => $page, 'perPage' => $perPage, 'totalNotes' => $totalNotes]) ?>
 
   <!-- Right Content Area  -->
   <div class="ml-auto w-2/3 bg-white p-4">

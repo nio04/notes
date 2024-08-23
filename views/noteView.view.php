@@ -13,7 +13,7 @@ $keywords = explode(", ", $keywords);
 <!-- Main container -->
 <div class="pt-16 relative">
 
-  <?php loadPartials("sidebar", ["notes" => $notes, 'isNoteCreatePage' => $isNoteCreatePage]) ?>
+  <?php loadPartials("sidebar", ["notes" => $notes, 'isNoteCreatePage' => $isNoteCreatePage, 'page' => $page, 'perPage' => $perPage, 'totalNotes' => $totalNotes]) ?>
 
   <!-- Right Content Area  -->
   <div class="ml-auto w-2/3 bg-white p-4">
