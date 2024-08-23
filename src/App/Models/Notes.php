@@ -10,7 +10,7 @@ class Notes {
   function getShortNotes($user_id) {
     $data = ['user_id' => $user_id];
 
-    return $this->query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id", $data);
+    return $this->query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY created_at DESC", $data);
   }
 
   function getNote($id) {
