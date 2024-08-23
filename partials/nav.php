@@ -4,11 +4,19 @@
     <a href="/">Notishes</a>
   </div>
 
+  <?php
+
+  echo ("<pre>");
+  var_dump($profile_picture);
+  echo ("</pre>");
+
+  ?>
+
   <!-- Right side profile section -->
   <div class="flex items-center space-x-4">
     <span class="text-white"><?= $username ?></span>
     <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
-      <img src="https://via.placeholder.com/150" alt="User Avatar" class="w-full h-full object-cover">
+      <img src="<?php echo loadPicture($profile_picture); ?>" alt="User Avatar" class="w-full h-full object-cover">
     </div>
 
     <!-- Logout button if the user is logged in -->
