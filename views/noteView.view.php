@@ -2,6 +2,9 @@
 
 $keywords = $note->keywords ?? "";
 $keywords = explode(", ", $keywords);
+echo ("<pre>");
+var_dump($note->attachment);
+echo ("</pre>");
 
 ?>
 
@@ -55,10 +58,25 @@ $keywords = explode(", ", $keywords);
       <!-- Attachment Placeholder -->
       <div class="mb-6 mt-20">
         <h3 class="text-xl font-semibold text-gray-800 mb-2">Attachments:</h3>
-        <div class="h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
-          No attachments uploaded
-        </div>
+
+        <?php if ($note->attachment ?? ""): ?>
+          <!-- Display image if $attachment is truthy -->
+          <div class="h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+            <img src="<?php echo loadPicture("users/attachments/$note->attachment"); ?>" alt="Attachment" class="max-w-full max-h-full object-contain">
+          </div>
+        <?php elseif (is_null($note->attachment ?? "")): ?>
+          <!-- Message if no attachment is provided -->
+          <div class="h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
+            No attachment could be found
+          </div>
+        <?php else: ?>
+          <!-- Message for other cases, if necessary -->
+          <div class="h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
+            Could not load the attachment
+          </div>
+        <?php endif; ?>
       </div>
+
 
       <!-- Close Editor Button -->
       <a href="/" class="block">

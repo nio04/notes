@@ -18,5 +18,5 @@ function redirect($path) {
 }
 
 function loadPicture($fileName) {
-  return "/uploads/users/profilePictures/" . htmlspecialchars($fileName);
+  return "/uploads/" . htmlspecialchars($fileName);
 }

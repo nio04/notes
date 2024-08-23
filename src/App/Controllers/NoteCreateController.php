@@ -37,7 +37,7 @@ class NoteCreateController extends Controller {
     }
 
     // validate attachment
-    $this->handleFileUpload($attachment, 'uploads/users/attachments');
+    $this->handleFileUpload($attachment, 'uploads/users/attachments/');
 
     // check if the title already exist
     $note = new Notes();
