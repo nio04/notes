@@ -10,11 +10,10 @@ class NoteCreateController extends Controller {
   use Validation;
 
   function index() {
-    if ($this->isLoggedIn) {
-      return $this->render("noteCreate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'isNoteCreatePage' => $this->isNoteCreatePage, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
-    } else {
+    if (!$this->isLoggedIn) {
       return $this->render("login");
     }
+    return $this->render("noteCreate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'isNoteCreatePage' => $this->isNoteCreatePage, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 
 

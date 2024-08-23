@@ -12,32 +12,27 @@ class NoteViewController extends Controller {
   use Validation;
 
   function index($id) {
-    if ($this->isLoggedIn) {
-
-      // get the note
-      $note = new Notes();
-      $singleNote = $note->getNote($id);
-      $oldNotes = $note->getOldNotesFromSideBar($id, $this->limit, $this->offset);
-
-      return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
-    } else {
+    if (!$this->isLoggedIn) {
       return $this->render("login");
     }
+
+    // get the note
+    $note = new Notes();
+    $singleNote = $note->getNote($id);
+    $oldNotes = $note->getOldNotesFromSideBar($id, $this->limit, $this->offset);
+
+    return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 
   function viewOldNotes($id) {
-    if ($this->isLoggedIn) {
-      $oldNoteId = $this->sanitize($id); // specific id
-      $notes_id = $this->sanitize($_POST['notes_id']); // notes_id 
+    $oldNoteId = $this->sanitize($id); // specific id
+    $notes_id = $this->sanitize($_POST['notes_id']); // notes_id 
 
-      // get the note
-      $note = new Notes();
-      $singleNote = $note->getSingleOldNote($oldNoteId);
-      $oldNotes = $note->getOldNotes($notes_id, $oldNoteId, $this->limit, $this->offset);
+    // get the note
+    $note = new Notes();
+    $singleNote = $note->getSingleOldNote($oldNoteId);
+    $oldNotes = $note->getOldNotes($notes_id, $oldNoteId, $this->limit, $this->offset);
 
-      return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
-    } else {
-      return $this->render("login");
-    }
+    return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 }

@@ -12,26 +12,24 @@ class NoteUpdateController extends Controller {
   use Validation;
 
   function index($id) {
-    if ($this->isLoggedIn) {
-
-      // get note details
-      $note = new Notes();
-      $note = $note->getNote($id);
-
-      // save the note in session
-      $this->setSession("note", $note[0]);
-
-      // save the value in a variable to prevent not-edited error
-      $id = $note[0]->id;
-      $title = $note[0]->title;
-      $description = $note[0]->description;
-      $keywords = $note[0]->keywords;
-
-
-      return $this->render("noteUpdate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'id' => $id, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
-    } else {
+    if (!$this->isLoggedIn) {
       return $this->render("login");
     }
+
+    // get note details
+    $note = new Notes();
+    $note = $note->getNote($id);
+
+    // save the note in session
+    $this->setSession("note", $note[0]);
+
+    // save the value in a variable to prevent not-edited error
+    $id = $note[0]->id;
+    $title = $note[0]->title;
+    $description = $note[0]->description;
+    $keywords = $note[0]->keywords;
+
+    return $this->render("noteUpdate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'id' => $id, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 
   function upload() {
