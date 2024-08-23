@@ -28,7 +28,7 @@ class NoteUpdateController extends Controller {
       $keywords = $note[0]->keywords;
 
 
-      return $this->render("noteUpdate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'id' => $id, 'title' => $title, 'description' => $description, 'keywords' => $keywords,, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+      return $this->render("noteUpdate", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'id' => $id, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     } else {
       return $this->render("login");
     }
