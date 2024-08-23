@@ -15,11 +15,12 @@
       <div class="flex-grow overflow-y-auto">
         <?php foreach ($notes as $note): ?>
           <a href="/notes/view/<?= $note->id ?>" class="block">
-            <div class="bg-white p-4 rounded-lg shadow mb-4">
-              <h3 class="font-semibold text-gray-700"><?= $note->title ?></h3>
+            <div class="bg-white p-4 rounded-lg shadow mb-4 note-item">
+              <h3 class="font-semibold text-gray-700 note-title"><?= $note->title ?></h3>
             </div>
           </a>
         <?php endforeach ?>
+
       </div>
     <?php else: ?>
       <div class="bg-gray-100 p-4 rounded-lg shadow mb-4 mt-auto w-full">

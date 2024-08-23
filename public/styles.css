@@ -1,0 +1,16 @@
+.note-item {
+  height: 80px; /* Fixed height for each note item */
+  overflow: hidden; /* Hide any overflow content */
+  display: flex;
+  align-items: center; /* Center content vertically */
+}
+
+.note-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add '...' at the end of the truncated text */
+  white-space: normal; /* Allow wrapping */
+  width: 100%; /* Ensure title takes full width */
+}
