@@ -9,7 +9,7 @@ class RegisterHandle extends Model {
   use Database;
 
   function save($data) {
-    // query
+    // save the user in table
     return $this->query("INSERT INTO users (first_name, last_name, username, email, mobile, dob, profile_picture, password) VALUES (:first_name, :last_name, :username, :email, :mobile, :dob, :profile_picture, :password)", $data);
   }
 }

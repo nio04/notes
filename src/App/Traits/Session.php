@@ -9,7 +9,7 @@ namespace App\Traits;
  * getting, setting, checking, removing session data, and managing session lifecycle.
  */
 trait Session {
-  public function startSession(): void {
+  static public function startSession(): void {
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
     }
@@ -34,11 +34,11 @@ trait Session {
    * $value = $this->getSession(['user', 'name']);
    * ```
    */
-  public function getSession($key, $default = null) {
-    $this->startSession();
+  static public function getSession($key, $default = null) {
+    self::startSession();
 
     if (is_array($key)) {
-      return $this->getNestedValue($_SESSION, $key, $default);
+      return self::getNestedValue($_SESSION, $key, $default);
     }
 
     return $_SESSION[$key] ?? $default;
@@ -62,11 +62,11 @@ trait Session {
    * $this->setSession(['user', 'name'], 'John Doe');
    * ```
    */
-  public function setSession($key, $value): void {
-    $this->startSession();
+  static public function setSession($key, $value): void {
+    self::startSession();
 
     if (is_array($key)) {
-      $this->setNestedValue($_SESSION, $key, $value);
+      self::setNestedValue($_SESSION, $key, $value);
     } else {
       $_SESSION[$key] = $value;
     }
@@ -90,11 +90,11 @@ trait Session {
    * $exists = $this->hasSession(['user', 'name']);
    * ```
    */
-  public function hasSession($key): bool {
-    $this->startSession();
+  static public function hasSession($key): bool {
+    self::startSession();
 
     if (is_array($key)) {
-      return $this->hasNestedValue($_SESSION, $key);
+      return self::hasNestedValue($_SESSION, $key);
     }
 
     return isset($_SESSION[$key]);
@@ -117,11 +117,11 @@ trait Session {
    * $this->removeSession(['user', 'name']);
    * ```
    */
-  public function removeSession($key): void {
-    $this->startSession();
+  static public function removeSession($key): void {
+    self::startSession();
 
     if (is_array($key)) {
-      $this->removeNestedValue($_SESSION, $key);
+      self::removeNestedValue($_SESSION, $key);
     } else {
       unset($_SESSION[$key]);
     }
@@ -137,8 +137,8 @@ trait Session {
    * $this->clearSession();
    * ```
    */
-  public function clearSession(): void {
-    $this->startSession();
+  static public function clearSession(): void {
+    self::startSession();
     session_unset();
   }
 
@@ -152,8 +152,8 @@ trait Session {
    * $this->destroySession();
    * ```
    */
-  public function destroySession(): void {
-    $this->startSession();
+  static public function destroySession(): void {
+    self::startSession();
     session_destroy();
   }
 
@@ -169,8 +169,8 @@ trait Session {
    * $this->regenerateSessionId(); // Regenerates and deletes the old session
    * ```
    */
-  public function regenerateSessionId(bool $deleteOldSession = true): void {
-    $this->startSession();
+  static public function regenerateSessionId(bool $deleteOldSession = true): void {
+    self::startSession();
     session_regenerate_id($deleteOldSession);
   }
 
@@ -185,7 +185,7 @@ trait Session {
    * @param mixed $default The default value to return if the key is not found.
    * @return mixed The retrieved value or the default value.
    */
-  private function getNestedValue($data, array $keys, $default) {
+  private static function getNestedValue($data, array $keys, $default) {
     foreach ($keys as $key) {
       if (is_array($data) && array_key_exists($key, $data)) {
         $data = $data[$key];
@@ -209,7 +209,7 @@ trait Session {
    * @param array $keys An array of keys to traverse.
    * @param mixed $value The value to set.
    */
-  private function setNestedValue(&$data, array $keys, $value): void {
+  private static function setNestedValue(&$data, array $keys, $value): void {
     foreach ($keys as $key) {
       if (is_array($data)) {
         if (!isset($data[$key]) || !is_array($data[$key])) {
@@ -239,7 +239,7 @@ trait Session {
    * @param array $keys An array of keys to traverse.
    * @return bool True if the nested value exists, false otherwise.
    */
-  private function hasNestedValue($data, array $keys): bool {
+  private static function hasNestedValue($data, array $keys): bool {
     foreach ($keys as $key) {
       if (is_array($data) && array_key_exists($key, $data)) {
         $data = $data[$key];
@@ -262,7 +262,7 @@ trait Session {
    * @param array|object &$data The array or object to remove the value from.
    * @param array $keys An array of keys to traverse.
    */
-  private function removeNestedValue(&$data, array $keys): void {
+  private static function removeNestedValue(&$data, array $keys): void {
     $key = array_shift($keys);
 
     if (is_array($data)) {
@@ -270,7 +270,7 @@ trait Session {
         if (empty($keys)) {
           unset($data[$key]);
         } else {
-          $this->removeNestedValue($data[$key], $keys);
+          self::removeNestedValue($data[$key], $keys);
         }
       }
     } elseif (is_object($data)) {
@@ -278,7 +278,7 @@ trait Session {
         if (empty($keys)) {
           unset($data->$key);
         } else {
-          $this->removeNestedValue($data->$key, $keys);
+          self::removeNestedValue($data->$key, $keys);
         }
       }
     }

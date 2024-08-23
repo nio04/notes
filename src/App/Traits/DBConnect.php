@@ -7,7 +7,7 @@ use PDOException;
 use Exception;
 
 trait DBConnect {
-  private $db;
+  protected static $db;
 
   /**
    * Initialize the PDO connection.
@@ -15,13 +15,13 @@ trait DBConnect {
    * @return void
    * @throws \Exception if the connection fails.
    */
-  public function connect(): void {
+  static function connect(): void {
     $dsn = 'mysql:host=localhost;dbname=notes';
     $username = 'nishat';
     $password = '1234';
 
     try {
-      $this->db = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]);
+      self::$db = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]);
     } catch (PDOException $e) {
       throw new Exception("Database connection failed: " . $e->getMessage());
     }
@@ -32,7 +32,7 @@ trait DBConnect {
    *
    * @return PDO The PDO instance.
    */
-  protected function getDb(): PDO {
-    return $this->db;
+  protected static function getDb(): PDO {
+    return self::$db;
   }
 }

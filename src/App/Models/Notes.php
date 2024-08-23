@@ -16,16 +16,16 @@ class Notes {
    * @param int $offset
    * @return mixed
    */
-  function getShortNotes($user_id, $limit, $offset) {
+  static function getShortNotes($user_id, $limit, $offset) {
     $data = ['user_id' => $user_id];
 
-    return $this->query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset", $data);
+    return self::query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset", $data);
   }
 
-  function getNote($id) {
+  static function getNote($id) {
     $data = ["id" => (int) $id];
 
-    return $this->query("SELECT * FROM notes WHERE id = :id ORDER BY created_at DESC", $data);
+    return self::query("SELECT * FROM notes WHERE id = :id ORDER BY created_at DESC", $data);
   }
 
   /**
@@ -33,9 +33,9 @@ class Notes {
    * @param string $title
    * @return mixed
    */
-  function getTitle(string $title) {
+  static function getTitle(string $title) {
     $data = ['title' => $title];
-    return $this->query("SELECT title FROM notes WHERE title = :title", $data);
+    return self::query("SELECT title FROM notes WHERE title = :title", $data);
   }
 
   /**
@@ -43,25 +43,25 @@ class Notes {
    * @param array $data
    * @return mixed
    */
-  function upload(array $data) {
-    return $this->query("INSERT INTO notes (user_id, title, description, keywords, attachment) VALUES (:user_id, :title, :description, :keywords, :attachment)", $data);
+  static function upload(array $data) {
+    return self::query("INSERT INTO notes (user_id, title, description, keywords, attachment) VALUES (:user_id, :title, :description, :keywords, :attachment)", $data);
   }
 
-  function deleteNote($id) {
+  static function deleteNote($id) {
     $data = ["id" => (int) $id];
-    return $this->query("DELETE FROM notes WHERE id = :id", $data);
+    return self::query("DELETE FROM notes WHERE id = :id", $data);
   }
 
-  function save($data) {
-    return $this->query("UPDATE notes SET user_id = :user_id, title = :title, description = :description, keywords = :keywords, attachment = :attachment WHERE id = :id ", $data);
+  static function save($data) {
+    return self::query("UPDATE notes SET user_id = :user_id, title = :title, description = :description, keywords = :keywords, attachment = :attachment WHERE id = :id ", $data);
   }
   /**
    * save the old note on 'old_notes' table
    * @param array $data
    * @return mixed
    */
-  function saveToOldNotes($data) {
-    return $this->query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
+  static function saveToOldNotes($data) {
+    return self::query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
   }
 
   /**
@@ -69,9 +69,9 @@ class Notes {
    * @param mixed $id
    * @return mixed
    */
-  function getSingleOldNote($id) {
+  static function getSingleOldNote($id) {
     $data = ["id" => (int) $id];
-    return $this->query("SELECT * FROM old_notes WHERE id = :id", $data);
+    return self::query("SELECT * FROM old_notes WHERE id = :id", $data);
   }
 
   /**
@@ -80,15 +80,15 @@ class Notes {
    * @param int $notes_id notes_id (foreign key)
    * @param int $id specific id (specific to the old note)
    */
-  function getOldNotes($notes_id, $id, $limit, $offset) {
+  static function getOldNotes($notes_id, $id, $limit, $offset) {
     $data = ["notes_id" => (int) $notes_id, 'id' => $id];
-    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id ORDER BY created_at DESC  LIMIT $limit OFFSET $offset", $data);
+    return self::query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id ORDER BY created_at DESC  LIMIT $limit OFFSET $offset", $data);
   }
 
-  function calculateTotalPage() {
-    $data = ['user_id' => $this->getSession(['user', 'id'])];
+  static function calculateTotalPage() {
+    $data = ['user_id' => self::getSession(['user', 'id'])];
 
-    $notes = $this->query("SELECT COUNT(*) AS totalNotes FROM notes where user_id = :user_id", $data)[0];
+    $notes = self::query("SELECT COUNT(*) AS totalNotes FROM notes where user_id = :user_id", $data)[0];
     return $notes->totalNotes;
   }
 }

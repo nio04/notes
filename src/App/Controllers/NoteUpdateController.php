@@ -17,8 +17,7 @@ class NoteUpdateController extends Controller {
     }
 
     // get note details
-    $note = new Notes();
-    $note = $note->getNote($id);
+    $note = Notes::getNote($id);
 
     // save the note in session
     $this->setSession("note", $note[0]);
@@ -50,11 +49,10 @@ class NoteUpdateController extends Controller {
     }
 
     // upload to table [curren(new)note]
-    $note = new Notes();
-    $note->save(['id' => (int)$id, 'user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
+    Notes::save(['id' => (int)$id, 'user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
 
     // upload to old_notes table (old note)
-    $note->saveToOldNotes(['users_id' => $this->getSession(['note', 'user_id']), 'notes_id' => $this->getSession(['note', 'id']), 'title' => $this->getSession(['note', 'title']), 'description' => $this->getSession(['note', 'description']), 'keywords' => $this->getSession(['note', 'keywords']), 'attachment' => $this->getSession(['note', 'attachment'])]);
+    Notes::saveToOldNotes(['users_id' => $this->getSession(['note', 'user_id']), 'notes_id' => $this->getSession(['note', 'id']), 'title' => $this->getSession(['note', 'title']), 'description' => $this->getSession(['note', 'description']), 'keywords' => $this->getSession(['note', 'keywords']), 'attachment' => $this->getSession(['note', 'attachment'])]);
 
     // clear note from session
     $this->removeSession('note');

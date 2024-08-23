@@ -41,9 +41,9 @@ trait Database {
    * ```
    * In this example, the `query` method executes a SELECT statement, binding the value `1` to the `:id` placeholder.
    */
-  public function query(string $sql, array $params = []) {
+  public static function query(string $sql, array $params = []) {
     try {
-      $stmt = $this->getDb()->prepare($sql);
+      $stmt = self::getDb()->prepare($sql);
 
       foreach ($params as $key => $value) {
         $stmt->bindValue($key, $value);
@@ -56,7 +56,7 @@ trait Database {
       if ($queryType === 'select') {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
       } elseif ($queryType === 'insert') {
-        return $this->getDb()->lastInsertId();
+        return self::getDb()->lastInsertId();
       } elseif ($queryType === 'update' || $queryType === 'delete') {
         return $stmt->rowCount();
       } else {

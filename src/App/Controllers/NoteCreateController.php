@@ -47,15 +47,14 @@ class NoteCreateController extends Controller {
     $this->handleFileUpload($attachment, 'uploads/users/attachments/');
 
     // check if the title already exist
-    $note = new Notes();
-    $titleExist = $note->getTitle($title);
+    $titleExist = Notes::getTitle($title);
 
     if ($titleExist) {
       return $this->render('noteCreate', ['errors' => ['this title is already in use!'], 'isLoggedIn' => $this->isLoggedIn, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // insert to table
-    $note->upload(['user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment['name']]);
+    Notes::upload(['user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment['name']]);
 
     redirect("");
   }

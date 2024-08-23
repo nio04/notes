@@ -14,8 +14,7 @@ class NoteDeleteController extends Controller {
       return $this->render("login");
     }
 
-    $note = new Notes();
-    $note->deleteNote($id);
+    Notes::deleteNote($id);
 
     redirect("");
   }

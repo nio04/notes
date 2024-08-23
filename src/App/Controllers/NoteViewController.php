@@ -17,9 +17,8 @@ class NoteViewController extends Controller {
     }
 
     // get the note
-    $note = new Notes();
-    $singleNote = $note->getNote($id);
-    $oldNotes = $note->getOldNotes($id, $id, $this->limit, $this->offset);
+    $singleNote = Notes::getNote($id);
+    $oldNotes = Notes::getOldNotes($id, $id, $this->limit, $this->offset);
 
     return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
@@ -34,9 +33,8 @@ class NoteViewController extends Controller {
     $notes_id = $this->sanitize($_POST['notes_id']); // notes_id 
 
     // get the note
-    $note = new Notes();
-    $singleNote = $note->getSingleOldNote($oldNoteId);
-    $oldNotes = $note->getOldNotes($notes_id, $oldNoteId, $this->limit, $this->offset);
+    $singleNote = Notes::getSingleOldNote($oldNoteId);
+    $oldNotes = Notes::getOldNotes($notes_id, $oldNoteId, $this->limit, $this->offset);
 
     return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
