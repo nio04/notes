@@ -27,6 +27,14 @@ class NoteCreateController extends Controller {
     //sanitze
     list($title, $description, $keywords) = $this->sanitize([$title, $description, $keywords]);
 
+    // check if all fields empty
+    $requiredFields = ['title', 'description'];
+    $checkEmpty = $this->isEmpty(['title' => $title, 'description' => $description], $requiredFields);
+
+    if (is_array($checkEmpty) && isset($checkEmpty[0])) {
+      return $this->render('noteCreate', ['errors' => $checkEmpty, 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'keywords' => $keywords, 'notes' => $this->shortNotes]);
+    }
+
     // validate
     /**
      * if description has content then title can not be empty
