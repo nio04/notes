@@ -10,5 +10,14 @@
     <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
       <img src="https://via.placeholder.com/150" alt="User Avatar" class="w-full h-full object-cover">
     </div>
+
+    <!-- Logout button if the user is logged in -->
+    <?php if ($isLoggedIn): ?>
+      <a href="/logout"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+        onclick="return confirm('Are you sure you want to delete this?');">
+        Logout
+      </a>
+    <?php endif; ?>
   </div>
 </nav>

@@ -1,7 +1,7 @@
 <?php loadPartials("header") ?>
 
 <!-- Navigation Bar -->
-<?php loadPartials("nav", ["username" => $username, 'profile_picture' => $profile_picture]) ?>
+<?php loadPartials("nav", ["username" => $username, 'profile_picture' => $profile_picture, 'isLoggedIn' => $isLoggedIn]) ?>
 
 <!-- Main container -->
 <div class="flex pt-16">

@@ -5,6 +5,7 @@ namespace Framework;
 use App\Controllers\HomeController;
 use App\Controllers\RegisterController;
 use App\Controllers\LoginController;
+use App\Controllers\LogoutController;
 use App\Controllers\NoteController;
 use App\Controllers\NoteCreateController;
 use App\Controllers\NoteDeleteController;
@@ -64,7 +65,11 @@ class Router {
       'action' => 'submit',
       'httpMethod' => 'post'
     ];
-
+    $this->routes['/logout'] = [
+      'controller' => LogoutController::class,
+      'action' => 'index',
+      'httpMethod' => 'get'
+    ];
     // Authentication routes [register]
     $this->routes['/register'] = [
       'controller' => RegisterController::class,
