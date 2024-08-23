@@ -24,103 +24,103 @@ class Router {
    * An associative array that stores all registered routes. Each route is associated with a controller,
    * an action method, and an HTTP method.
    */
-  protected array $routes = [];
+  protected static array $routes = [];
 
   /**
    * @var string $uri
    * Stores the processed URI from the incoming HTTP request. This is used to determine which route
    * should be matched and handled.
    */
-  protected string $uri;
+  protected static string $uri;
 
   /**
    * @var mixed $params
    * Stores any extracted parameters from the URI. These parameters can be passed to controller actions
    * when needed.
    */
-  protected $params;
+  protected static $params;
 
   /**
    * Automatically registers routes by mapping specific URIs to corresponding controllers and actions.
    * This method defines the available routes in the application, such as home, authentication, blogs,
    * dashboard, and category routes.
    */
-  public function autoRegisterRoute(): void {
+  public static function autoRegisterRoute(): void {
     // Home routes
-    $this->routes['/'] = [
+    self::$routes['/'] = [
       'controller' => HomeController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
 
     // Authentication routes [login]
-    $this->routes['/login'] = [
+    self::$routes['/login'] = [
       'controller' => LoginController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
     // Authentication routes
-    $this->routes['/login/submit'] = [
+    self::$routes['/login/submit'] = [
       'controller' => LoginController::class,
       'action' => 'submit',
       'httpMethod' => 'post'
     ];
-    $this->routes['/logout'] = [
+    self::$routes['/logout'] = [
       'controller' => LogoutController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
     // Authentication routes [register]
-    $this->routes['/register'] = [
+    self::$routes['/register'] = [
       'controller' => RegisterController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
     // Authentication routes
-    $this->routes['/register/submit'] = [
+    self::$routes['/register/submit'] = [
       'controller' => RegisterController::class,
       'action' => 'submit',
       'httpMethod' => 'post'
     ];
 
     // notes
-    $this->routes['/notes'] = [
+    self::$routes['/notes'] = [
       'controller' => NoteController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
-    $this->routes['/notes/create'] = [
+    self::$routes['/notes/create'] = [
       'controller' => NoteCreateController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
-    $this->routes['/notes/save'] = [
+    self::$routes['/notes/save'] = [
       'controller' => NoteCreateController::class,
       'action' => 'save',
       'httpMethod' => 'post'
     ];
-    $this->routes['/notes/view'] = [
+    self::$routes['/notes/view'] = [
       'controller' => NoteViewController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
     // old note view
-    $this->routes['/notes/viewOld'] = [
+    self::$routes['/notes/viewOld'] = [
       'controller' => NoteViewController::class,
       'action' => 'viewOldNotes',
       'httpMethod' => 'post'
     ];
-    $this->routes['/notes/delete'] = [
+    self::$routes['/notes/delete'] = [
       'controller' => NoteDeleteController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
-    $this->routes['/notes/update'] = [
+    self::$routes['/notes/update'] = [
       'controller' => NoteUpdateController::class,
       'action' => 'index',
       'httpMethod' => 'get'
     ];
-    $this->routes['/notes/upload'] = [
+    self::$routes['/notes/upload'] = [
       'controller' => NoteUpdateController::class,
       'action' => 'upload',
       'httpMethod' => 'post'
@@ -135,16 +135,16 @@ class Router {
    *
    * @throws \Exception if the route is not found or if the HTTP method is not allowed.
    */
-  public function dispatch(): void {
+  public static function dispatch(): void {
     $uri = parse_url(rtrim($_SERVER['REQUEST_URI'], '/'), PHP_URL_PATH);
     $httpMethod = strtolower($_SERVER['REQUEST_METHOD'] ?? 'get');
 
     // Extract parameters from the URI if any
-    $this->extractParams($uri);
+    self::extractParams($uri);
 
-    foreach ($this->routes as $routeUri => $routeDetails) {
+    foreach (self::$routes as $routeUri => $routeDetails) {
 
-      if ($this->matchUri($routeUri, $this->uri)) {
+      if (self::matchUri($routeUri, self::$uri)) {
         if ($httpMethod !== $routeDetails['httpMethod']) {
           throw new \Exception("HTTP method not allowed for this route.");
         }
@@ -153,7 +153,7 @@ class Router {
         $action = $routeDetails['action'] ?? 'index';
 
         if (method_exists($controller, $action)) {
-          call_user_func_array([$controller, $action], [$this->params]);
+          call_user_func_array([$controller, $action], [self::$params]);
         } else {
           throw new \Exception("Action $action not found in controller.");
         }
@@ -172,17 +172,17 @@ class Router {
    *
    * @param string $uri The URI string from the HTTP request.
    */
-  private function extractParams(string $uri): void {
+  private static function extractParams(string $uri): void {
     $uriSegments = explode('/', trim($uri, '/'));
 
     if (isset($uriSegments[2])) {
-      $this->params = $uriSegments[2];
+      self::$params = $uriSegments[2];
       unset($uriSegments[2]);
       $uriSegments = array_values($uriSegments);
     }
 
     $uri = implode('/', $uriSegments) ?: '/';
-    $this->uri = "/$uri";
+    self::$uri = "/$uri";
   }
 
   /**
@@ -192,7 +192,7 @@ class Router {
    * @param string $requestUri The URI from the HTTP request.
    * @return bool Returns true if the URIs match, otherwise false.
    */
-  private function matchUri(string $routeUri, string $requestUri): bool {
+  private static function matchUri(string $routeUri, string $requestUri): bool {
     return rtrim($routeUri, '/') === rtrim($requestUri, '/');
   }
 }

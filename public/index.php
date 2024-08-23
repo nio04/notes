@@ -7,9 +7,8 @@ use Framework\Router;
 require "../vendor/autoload.php";
 require "../helpers.php";
 
-$router = new Router();
-$router->autoRegisterRoute();
-$router->dispatch();
+Router::autoRegisterRoute();
+Router::dispatch();
 
 // unset($_SESSION["user"]);
 

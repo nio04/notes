@@ -7,34 +7,34 @@ use App\Traits\Database;
 class User {
   use Database;
 
-  function getUser($username) {
+  static function getUser($username) {
     $data = ['username' => $username];
 
-    return $this->query('SELECT id, username, profile_picture FROM users WHERE username = :username', $data);
+    return self::query('SELECT id, username, profile_picture FROM users WHERE username = :username', $data);
   }
 
-  function getUserbyUsername($username) {
+  static function getUserbyUsername($username) {
     $data = [
       'username' => $username
     ];
-    return $this->query("SELECT username, password FROM users WHERE username = :username", $data);
+    return self::query("SELECT username, password FROM users WHERE username = :username", $data);
   }
 
-  function getUsername($username) {
+  static function getUsername($username) {
     $data = ['username' => $username];
 
-    return $this->query("SELECT username from users WHERE username = :username", $data);
+    return self::query("SELECT username from users WHERE username = :username", $data);
   }
 
-  function getEmail($email) {
+  static function getEmail($email) {
     $data = ['email' => $email];
 
-    return $this->query("SELECT email from users WHERE email = :email", $data);
+    return self::query("SELECT email from users WHERE email = :email", $data);
   }
 
-  function getMobile($mobile) {
+  static function getMobile($mobile) {
     $data = ['mobile' => $mobile];
 
-    return $this->query("SELECT mobile from users WHERE mobile = :mobile", $data);
+    return self::query("SELECT mobile from users WHERE mobile = :mobile", $data);
   }
 }
