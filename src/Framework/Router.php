@@ -104,6 +104,12 @@ class Router {
       'action' => 'index',
       'httpMethod' => 'get'
     ];
+    // old note view
+    $this->routes['/notes/viewOld'] = [
+      'controller' => NoteViewController::class,
+      'action' => 'viewOldNotes',
+      'httpMethod' => 'post'
+    ];
     $this->routes['/notes/delete'] = [
       'controller' => NoteDeleteController::class,
       'action' => 'index',

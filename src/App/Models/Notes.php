@@ -42,14 +42,34 @@ class Notes {
     return $this->query("UPDATE notes SET user_id = :user_id, title = :title, description = :description, keywords = :keywords, attachment = :attachment WHERE id = :id ", $data);
   }
   function saveToOldNotes($data) {
-    echo ("<pre>");
-    var_dump($data);
-    echo ("</pre>");
     return $this->query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
   }
 
-  function getOldNotes($id) {
+  function getSingleOldNote($id) {
+    $data = ["id" => (int) $id];
+
+    return $this->query("SELECT * FROM old_notes WHERE id = :id", $data);
+  }
+
+  /**
+   * load old notes when clicked from side bar
+   * @param mixed $id
+   * @return mixed
+   */
+  function getOldNotesFromSideBar($id) {
     $data = ["notes_id" => (int) $id];
-    return $this->query("SELECT id, title, created_at FROM old_notes WHERE notes_id = :notes_id", $data);
+    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id", $data);
+  }
+
+  /**
+   * load old notes when clicked from menu (under the noteview) 
+   * 
+   * 
+   * @param int $notes_id notes_id (foreign key)
+   * @param int $id specific id (specific to the old note)
+   */
+  function getOldNotes($notes_id, $id) {
+    $data = ["notes_id" => (int) $notes_id, 'id' => $id];
+    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id", $data);
   }
 }
