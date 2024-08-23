@@ -2,9 +2,6 @@
 
 $keywords = $note->keywords ?? "";
 $keywords = explode(", ", $keywords);
-echo ("<pre>");
-var_dump($note->attachment);
-echo ("</pre>");
 
 ?>
 
@@ -50,9 +47,13 @@ echo ("</pre>");
       <!-- Keywords Section -->
       <div class="my-12 mt-20">
         <h3 class="text-sm font-semibold text-gray-800 mb-2">Keywords:</h3>
-        <?php foreach ($keywords as $keyword): ?>
-          <span class="inline-block bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"><?= $keyword ?></span>
-        <?php endforeach ?>
+        <?php if (empty($keywords[0])): ?>
+          <p class="text-gray-600">No keywords were found.</p>
+        <?php else: ?>
+          <?php foreach ($keywords as $keyword): ?>
+            <span class="inline-block bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"><?= htmlspecialchars($keyword) ?></span>
+          <?php endforeach ?>
+        <?php endif; ?>
       </div>
 
       <!-- Attachment Placeholder -->
