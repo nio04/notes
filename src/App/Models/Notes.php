@@ -16,7 +16,7 @@ class Notes {
   function getNote($id) {
     $data = ["id" => (int) $id];
 
-    return $this->query("SELECT * FROM notes WHERE id = :id", $data);
+    return $this->query("SELECT * FROM notes WHERE id = :id ORDER BY created_at DESC", $data);
   }
 
   function getTitle(string $title) {
@@ -58,7 +58,7 @@ class Notes {
    */
   function getOldNotesFromSideBar($id) {
     $data = ["notes_id" => (int) $id];
-    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id", $data);
+    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id ORDER BY created_at DESC", $data);
   }
 
   /**
@@ -70,6 +70,6 @@ class Notes {
    */
   function getOldNotes($notes_id, $id) {
     $data = ["notes_id" => (int) $notes_id, 'id' => $id];
-    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id", $data);
+    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id ORDER BY created_at DESC", $data);
   }
 }
