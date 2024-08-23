@@ -10,9 +10,17 @@
 
             <!-- Submit button that displays the note details -->
             <button type="submit" class="flex justify-between w-full text-left">
-              <span class="font-semibold text-gray-600"><?= $oldNote->title ?></span>
-              <span class="text-gray-500 text-sm"><?= $oldNote->created_at ?></span>
+              <span class="font-semibold text-gray-600"><?= htmlspecialchars($oldNote->title) ?></span>
+
+              <!-- Format the date and time -->
+              <span class="text-gray-500 text-sm">
+                <?php
+                $date = new DateTime($oldNote->created_at);
+                echo $date->format('F j, Y, g:i A');
+                ?>
+              </span>
             </button>
+
           </form>
         <?php endforeach; ?>
       </ul>
