@@ -19,11 +19,16 @@ class NoteViewController extends Controller {
     // get the note
     $note = new Notes();
     $singleNote = $note->getNote($id);
-    $oldNotes = $note->getOldNotesFromSideBar($id, $this->limit, $this->offset);
+    $oldNotes = $note->getOldNotes($id, $id, $this->limit, $this->offset);
 
     return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 
+  /**
+   * when clicked on one old note, this method open the old note in a noteView
+   * @param mixed $id
+   * @return void
+   */
   function viewOldNotes($id) {
     $oldNoteId = $this->sanitize($id); // specific id
     $notes_id = $this->sanitize($_POST['notes_id']); // notes_id 

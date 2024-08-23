@@ -9,6 +9,13 @@ class Notes {
   use Database;
   use Session;
 
+  /**
+   * get note id, title, created value from 'note' table to show at sidebar
+   * @param int $user_id
+   * @param int $limit
+   * @param int $offset
+   * @return mixed
+   */
   function getShortNotes($user_id, $limit, $offset) {
     $data = ['user_id' => $user_id];
 
@@ -21,13 +28,18 @@ class Notes {
     return $this->query("SELECT * FROM notes WHERE id = :id ORDER BY created_at DESC", $data);
   }
 
+  /**
+   * used for check if title already exist
+   * @param string $title
+   * @return mixed
+   */
   function getTitle(string $title) {
     $data = ['title' => $title];
     return $this->query("SELECT title FROM notes WHERE title = :title", $data);
   }
 
   /**
-   * create note on db table
+   * create note on 'notes' table
    * @param array $data
    * @return mixed
    */
@@ -43,24 +55,23 @@ class Notes {
   function save($data) {
     return $this->query("UPDATE notes SET user_id = :user_id, title = :title, description = :description, keywords = :keywords, attachment = :attachment WHERE id = :id ", $data);
   }
-
+  /**
+   * save the old note on 'old_notes' table
+   * @param array $data
+   * @return mixed
+   */
   function saveToOldNotes($data) {
     return $this->query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
   }
 
-  function getSingleOldNote($id) {
-    $data = ["id" => (int) $id];
-    return $this->query("SELECT * FROM old_notes WHERE id = :id", $data);
-  }
-
   /**
-   * load old notes when clicked from side bar
+   * get note info for old notes when clicked one old note
    * @param mixed $id
    * @return mixed
    */
-  function getOldNotesFromSideBar($id, $limit, $offset) {
-    $data = ["notes_id" => (int) $id];
-    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id ORDER BY created_at DESC  LIMIT $limit OFFSET $offset", $data);
+  function getSingleOldNote($id) {
+    $data = ["id" => (int) $id];
+    return $this->query("SELECT * FROM old_notes WHERE id = :id", $data);
   }
 
   /**
@@ -79,8 +90,5 @@ class Notes {
 
     $notes = $this->query("SELECT COUNT(*) AS totalNotes FROM notes where user_id = :user_id", $data)[0];
     return $notes->totalNotes;
-    // $notes = $this->query("SELECT COUNT(*) AS totalNotes FROM notes where user_id = :user_id", $data)[0];
-    // show 10 res at one time
-    // return ceil($notes->totalNotes / 10);
   }
 }
