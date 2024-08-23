@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use App\Traits\Database;
+use App\Traits\Session;
 
 class Notes {
   use Database;
+  use Session;
 
-  function getShortNotes($user_id) {
+  function getShortNotes($user_id, $limit, $offset) {
     $data = ['user_id' => $user_id];
 
-    return $this->query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY created_at DESC", $data);
+    return $this->query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset", $data);
   }
 
   function getNote($id) {
@@ -41,13 +43,13 @@ class Notes {
   function save($data) {
     return $this->query("UPDATE notes SET user_id = :user_id, title = :title, description = :description, keywords = :keywords, attachment = :attachment WHERE id = :id ", $data);
   }
+
   function saveToOldNotes($data) {
     return $this->query("INSERT INTO old_notes (users_id, notes_id, title, description, keywords, attachment) VALUES(:users_id, :notes_id, :title, :description, :keywords, :attachment)", $data);
   }
 
   function getSingleOldNote($id) {
     $data = ["id" => (int) $id];
-
     return $this->query("SELECT * FROM old_notes WHERE id = :id", $data);
   }
 
@@ -56,20 +58,29 @@ class Notes {
    * @param mixed $id
    * @return mixed
    */
-  function getOldNotesFromSideBar($id) {
+  function getOldNotesFromSideBar($id, $limit, $offset) {
     $data = ["notes_id" => (int) $id];
-    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id ORDER BY created_at DESC", $data);
+    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id ORDER BY created_at DESC  LIMIT $limit OFFSET $offset", $data);
   }
 
   /**
    * load old notes when clicked from menu (under the noteview) 
    * 
-   * 
    * @param int $notes_id notes_id (foreign key)
    * @param int $id specific id (specific to the old note)
    */
-  function getOldNotes($notes_id, $id) {
+  function getOldNotes($notes_id, $id, $limit, $offset) {
     $data = ["notes_id" => (int) $notes_id, 'id' => $id];
-    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id ORDER BY created_at DESC", $data);
+    return $this->query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id ORDER BY created_at DESC  LIMIT $limit OFFSET $offset", $data);
+  }
+
+  function calculateTotalPage() {
+    $data = ['user_id' => $this->getSession(['user', 'id'])];
+
+    $notes = $this->query("SELECT COUNT(*) AS totalNotes FROM notes where user_id = :user_id", $data)[0];
+    return $notes->totalNotes;
+    // $notes = $this->query("SELECT COUNT(*) AS totalNotes FROM notes where user_id = :user_id", $data)[0];
+    // show 10 res at one time
+    // return ceil($notes->totalNotes / 10);
   }
 }

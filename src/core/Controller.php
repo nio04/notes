@@ -13,13 +13,22 @@ class Controller extends View {
   protected $username;
   protected $profile_picture;
   protected $isNoteCreatePage;
+  protected $page;
+  protected $perPage = 10;
+  protected $offset;
+  protected $totalNotes;
 
   function __construct() {
     $notes = new Notes();
+    // pagination
+    $this->page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $this->offset = ($this->page - 1) * $this->perPage;
+    $this->totalNotes = $notes->calculateTotalPage();
+
     $this->isLoggedIn = $this->hasSession('user');
     $this->username = $this->getSession(['user', 'username']);
     $this->profile_picture = $this->getSession(['user', 'profile_picture']);
-    $this->shortNotes = $notes->getShortNotes($this->getSession(['user', 'id']));
+    $this->shortNotes = $notes->getShortNotes($this->getSession(['user', 'id']), $this->perPage, $this->offset);
     $this->isNoteCreatePage = $_SERVER['REQUEST_URI'] === "/notes/create";
   }
 }
