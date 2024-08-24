@@ -11,4 +11,5 @@ return array(
     'App\\Traits\\' => array($baseDir . '/src/App/Traits'),
     'App\\Models\\' => array($baseDir . '/src/App/Models'),
     'App\\Controllers\\' => array($baseDir . '/src/App/Controllers'),
+    'App\\Config\\' => array($baseDir . '/src/config'),
 );

@@ -20,6 +20,7 @@ class ComposerStaticInit24277bbfbb0f0fb5cb9aed965ec45c9a
             'App\\Traits\\' => 11,
             'App\\Models\\' => 11,
             'App\\Controllers\\' => 16,
+            'App\\Config\\' => 11,
         ),
     );
 
@@ -43,6 +44,10 @@ class ComposerStaticInit24277bbfbb0f0fb5cb9aed965ec45c9a
         'App\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/App/Controllers',
+        ),
+        'App\\Config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/config',
         ),
     );
 
