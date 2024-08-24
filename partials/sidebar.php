@@ -8,13 +8,21 @@
     </div>
   <?php endif ?>
 
+  <?php
+
+  echo ("<pre>");
+  var_dump($page);
+  echo ("</pre>");
+
+  ?>
+
   <!-- Notes Section -->
   <div class="overflow-y-auto row-start-2 row-end-3 mb-32">
     <?php if (!empty($notes)): ?>
       <h2 class="text-xl font-semibold text-gray-800 mb-4">All the Notes</h2>
       <div>
         <?php foreach ($notes as $index => $note): ?>
-          <a href="/notes/view/<?= $note->id ?>" class="block">
+          <a href="/notes/view/<?= $note->id ?>?page=<?= $page ?>" class="block">
             <div class="bg-white p-4 rounded-lg shadow mb-4 note-item grid grid-cols-[auto_1fr] items-center">
               <!-- Note Index -->
               <div class="note-index bg-blue-600 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">

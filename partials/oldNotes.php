@@ -1,5 +1,11 @@
 <div class="p-8 bg-white rounded-lg shadow-lg max-w-4xl mt-8 absolute right-0 w-8/12">
-  <h3 class="text-xl font-semibold text-gray-800 mb-4">Old Versions</h3>
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">
+    <?php if (!empty($oldNotes)): ?>
+      Found <?= count($oldNotes) ?> old versions
+    <?php else: ?>
+      Old Version
+    <?php endif; ?>
+  </h3>
 
   <div class="max-h-40 overflow-y-auto">
     <?php if (!empty($oldNotes)): ?>
