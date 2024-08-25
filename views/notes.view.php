@@ -14,7 +14,7 @@
 
     <!-- show alert message -->
     <?php if (isset($_SESSION['message'])): ?>
-      <div class="bg-green-500 text-white text-2xl font-bold text-center mx-auto uppercase py-2 px-4 rounded-md mb-4">
+      <div class="bg-green-500 text-white text-2xl font-semi-bold text-center mx-auto uppercase py-2 px-4 rounded-md mb-4">
         <?= htmlspecialchars($_SESSION['message']) ?>
       </div>
       <?php unset($_SESSION['message']);

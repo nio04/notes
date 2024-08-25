@@ -60,6 +60,8 @@ class NoteCreateController extends Controller {
     // insert to table
     Notes::upload(['user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment['name']]);
 
+    self::setSession(['message'], 'note successfully created');
+
     redirect("");
   }
 }
