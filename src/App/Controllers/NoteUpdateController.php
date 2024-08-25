@@ -65,6 +65,8 @@ class NoteUpdateController extends Controller {
     // clear note from session
     $this->removeSession('note');
 
+    self::setSession(['message'], 'note successfully updated');
+
     redirect("");
   }
 }
