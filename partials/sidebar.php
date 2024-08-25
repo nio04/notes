@@ -15,7 +15,7 @@
       <div>
         <?php foreach ($notes as $index => $note): ?>
           <a href="/notes/view/<?= $note->id ?>?page=<?= $page ?>" class="block">
-            <div class="bg-white p-4 rounded-lg shadow mb-4 note-item grid grid-cols-[auto_1fr] items-center">
+            <div class="p-4 rounded-lg shadow mb-4 note-item grid grid-cols-[auto_1fr] items-center <?= $note->id === $activeNote ? 'bg-yellow-100 border-l-4 border-yellow-400' : 'bg-white' ?>">
               <!-- Note Index -->
               <div class="note-index bg-blue-600 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">
                 <?= ($page - 1) * $perPage + $index + 1 ?>
@@ -23,6 +23,7 @@
               <!-- Note Title -->
               <h3 class="font-semibold text-gray-700 note-title"><?= htmlspecialchars($note->title) ?></h3>
             </div>
+
           </a>
         <?php endforeach ?>
       </div>

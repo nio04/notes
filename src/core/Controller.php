@@ -11,6 +11,7 @@ class Controller extends View {
   protected $isLoggedIn;
   protected $isHomepage;
   protected $shortNotes;
+  protected $activeNote;
   protected $username;
   protected $profile_picture;
   protected $isNoteCreatePage;

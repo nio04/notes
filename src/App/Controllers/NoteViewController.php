@@ -16,11 +16,14 @@ class NoteViewController extends Controller {
       return $this->render("login");
     }
 
+    // save the note id to our parent controller
+    $this->activeNote = (int) $id;
+
     // get the note
     $singleNote = Notes::getNote($id);
     $oldNotes = Notes::getOldNotes($id, $id, $this->limit, $this->offset);
 
-    return $this->render("noteView", ['viewingOldNote' => false, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+    return $this->render("noteView", ['viewingOldNote' => false, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'activeNote' => $this->activeNote, 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 
   /**
