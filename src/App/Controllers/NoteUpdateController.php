@@ -63,6 +63,11 @@ class NoteUpdateController extends Controller {
 
     // clear note from session
     $this->removeSession('note');
-    redirect("");
+
+    // after note update, redirect to note view page
+    $singleNote = Notes::getNote($id);
+    $oldNotes = Notes::getOldNotes($id, $id, $this->limit, $this->offset);
+
+    return $this->render("noteView", ['viewingOldNote' => false, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 }
