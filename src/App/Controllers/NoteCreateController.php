@@ -31,7 +31,7 @@ class NoteCreateController extends Controller {
     $checkEmpty = $this->isEmpty(['title' => $title, 'description' => $description], $requiredFields);
 
     if (is_array($checkEmpty) && isset($checkEmpty[0])) {
-      return $this->render('noteCreate', ['errors' => $checkEmpty, 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'keywords' => $keywords, 'notes' => $this->shortNotes, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+      return $this->render('noteCreate', ['errors' => $checkEmpty, 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'title' => $title, 'keywords' => $keywords, 'notes' => $this->shortNotes, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // validate
