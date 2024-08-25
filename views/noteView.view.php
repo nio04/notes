@@ -34,10 +34,20 @@ $keywords = explode(", ", $keywords);
       <!-- Note Title and Date-Time -->
       <div class="space-y-2">
         <h2 class="text-4xl font-bold text-gray-800"><?= $note->title ?></h2>
+
+        <!-- Display the creation date -->
         <p class="text-sm text-gray-500">
-          <?= date('F j, Y, g:i a', strtotime($note->created_at)) ?>
+          created at: <?= date('F j, Y, g:i a', strtotime($note->created_at)) ?>
         </p>
+
+        <!-- Conditionally display the update date if the note was updated -->
+        <?php if (!empty($note->updated_at) && $note->updated_at !== $note->created_at): ?>
+          <p class="text-sm text-gray-500">
+            updated at: <?= date('F j, Y, g:i a', strtotime($note->updated_at)) ?>
+          </p>
+        <?php endif; ?>
       </div>
+
 
       <!-- Note Description -->
       <div class="p-6 bg-gray-50 rounded-lg">
