@@ -18,7 +18,7 @@ try {
 
   $pdo->beginTransaction();
 
-  $numRecords = 1000000;
+  $numRecords = 10000;
   $batchSize = 1000;
 
   for ($i = 1; $i <= $numRecords; $i++) {
