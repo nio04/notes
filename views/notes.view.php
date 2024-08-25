@@ -11,6 +11,18 @@
   <!-- Right Content Area -->
   <div class="ml-auto w-2/3 bg-white p-6 pb-6 h-screen">
 
+
+    <!-- show alert message -->
+    <?php if (isset($_SESSION['message'])): ?>
+      <div class="bg-green-500 text-white text-2xl font-bold text-center mx-auto uppercase py-2 px-4 rounded-md mb-4">
+        <?= htmlspecialchars($_SESSION['message']) ?>
+      </div>
+      <?php unset($_SESSION['message']);
+      ?>
+    <?php endif; ?>
+
+
+
     <?php if (!empty($query) && !empty($noteSearch)): ?>
       <!-- Search Results Found Section -->
       <div class="mb-6">

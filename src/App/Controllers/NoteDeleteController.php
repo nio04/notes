@@ -15,7 +15,7 @@ class NoteDeleteController extends Controller {
     }
 
     Notes::deleteNote($id);
-
+    self::setSession(['message'], 'note successfully deleted');
     redirect("");
   }
 }
