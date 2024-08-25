@@ -26,12 +26,12 @@ class NoteCreateController extends Controller {
     //sanitze
     list($title, $description, $keywords) = $this->sanitize([$title, $description, $keywords]);
 
-    // check if all fields empty
+    // check if title, description fields empty
     $requiredFields = ['title', 'description'];
     $checkEmpty = $this->isEmpty(['title' => $title, 'description' => $description], $requiredFields);
 
-    if (is_array($checkEmpty) && isset($checkEmpty[0])) {
-      return $this->render('noteCreate', ['errors' => $checkEmpty, 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'title' => $title, 'keywords' => $keywords, 'notes' => $this->shortNotes, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+    if (is_array($checkEmpty)) {
+      return $this->render('noteCreate', ['errors' => $checkEmpty, 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'notes' => $this->shortNotes, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // validate
@@ -40,7 +40,9 @@ class NoteCreateController extends Controller {
      * and if title have content, then description can be empty
      */
     if (strlen(trim($description)) > 0 && strlen(trim($title)) === 0) {
-      return $this->render('noteCreate', ['errors' => ['title can not be empty!'], 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+      $errors['noteError'] = 'title can not be empty!';
+
+      return $this->render('noteCreate', ['errors' => $errors, 'isLoggedIn' => $this->isLoggedIn, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // validate attachment
@@ -50,7 +52,9 @@ class NoteCreateController extends Controller {
     $titleExist = Notes::getTitle($title, $user_id = self::getSession(['user', 'id']));
 
     if ($titleExist) {
-      return $this->render('noteCreate', ['errors' => ['this title is already in use!'], 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+      $errors['noteError'] = 'this title is already in use!';
+
+      return $this->render('noteCreate', ['errors' => $errors, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // insert to table

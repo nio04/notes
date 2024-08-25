@@ -18,18 +18,27 @@
       <!-- Form -->
       <form action="/notes/save" method="POST" enctype="multipart/form-data">
 
-        <?php loadPartials("errors", ['errors' => $errors ?? []]) ?>
+        <?php if (!empty($errors['noteError'])): ?>
+          <p class="text-red-500 text-sm mt-2 mb-6"><?php echo $errors['noteError']; ?></p>
+        <?php endif; ?>
 
         <!-- Title Input -->
         <div class="mb-6">
           <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
           <input type="text" id="title" name="title" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter note title" value="<?= $title ?? "" ?>">
+
+          <?php if (!empty($errors['title'])): ?>
+            <p class="text-red-500 text-sm mt-2"><?php echo $errors['title']; ?></p>
+          <?php endif; ?>
         </div>
 
         <!-- Description Textarea -->
         <div class="mb-6">
           <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
           <textarea id="description" name="description" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter note description"><?= $description ?? "" ?></textarea>
+          <?php if (!empty($errors['description'])): ?>
+            <p class="text-red-500 text-sm mt-2"><?php echo $errors['description']; ?></p>
+          <?php endif; ?>
         </div>
 
         <!-- Keywords Input -->
