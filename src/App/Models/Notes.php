@@ -19,7 +19,7 @@ class Notes {
   static function getShortNotes($user_id, $limit, $offset) {
     $data = ['user_id' => $user_id];
 
-    return self::query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset", $data);
+    return self::query("SELECT id, title, created_at FROM notes WHERE user_id = :user_id ORDER BY updated_at DESC LIMIT $limit OFFSET $offset", $data);
   }
 
   static function getNote($id) {
