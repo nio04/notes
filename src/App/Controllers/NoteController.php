@@ -13,6 +13,6 @@ class NoteController extends Controller {
     if (!$this->isLoggedIn) {
       return $this->render("login");
     }
-    return $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+    return $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'isHomepage' => $this->isHomepage, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 }

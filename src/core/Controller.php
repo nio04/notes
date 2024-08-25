@@ -9,6 +9,7 @@ class Controller extends View {
   use Session;
 
   protected $isLoggedIn;
+  protected $isHomepage;
   protected $shortNotes;
   protected $username;
   protected $profile_picture;
@@ -26,6 +27,7 @@ class Controller extends View {
     $this->totalNotes = $notes->calculateTotalPage();
 
     $this->isLoggedIn = $this->hasSession('user');
+    $this->isHomepage = $_SERVER['REQUEST_URI'] === "/" ? true : false;
     $this->username = $this->getSession(['user', 'username']);
     $this->profile_picture = $this->getSession(['user', 'profile_picture']);
     $this->shortNotes = $notes->getShortNotes($this->getSession(['user', 'id']), $this->limit, $this->offset);

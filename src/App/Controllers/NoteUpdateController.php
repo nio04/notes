@@ -65,11 +65,6 @@ class NoteUpdateController extends Controller {
     // clear note from session
     $this->removeSession('note');
 
-    // after note update, redirect to note view page
-    $singleNote = Notes::getNote($id);
-    $oldNotes = Notes::getOldNotes($id, $id, $this->limit, $this->offset);
-
-
     redirect("");
   }
 }
