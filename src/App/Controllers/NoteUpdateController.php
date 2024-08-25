@@ -49,7 +49,7 @@ class NoteUpdateController extends Controller {
     }
 
     // check if the title already exist
-    $titleExist = Notes::getTitle($title, $user_id = self::getSession(['user', 'id']));
+    $titleExist = Notes::getTitle($title, self::getSession(['user', 'id']));
 
     if ($titleExist) {
       $errors['noteUpdateError'] = 'this title is already in use!';
@@ -58,10 +58,10 @@ class NoteUpdateController extends Controller {
 
 
     // upload to table [curren(new)note]
-    Notes::save(['id' => (int)$id, 'user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
+    Notes::save(['id' => (int)$id, 'user_id' => self::getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
 
     // upload to old_notes table (old note)
-    Notes::saveToOldNotes(['users_id' => $this->getSession(['note', 'user_id']), 'notes_id' => $this->getSession(['note', 'id']), 'title' => $this->getSession(['note', 'title']), 'description' => $this->getSession(['note', 'description']), 'keywords' => $this->getSession(['note', 'keywords']), 'attachment' => $this->getSession(['note', 'attachment'])]);
+    Notes::saveToOldNotes(['users_id' => self::getSession(['note', 'user_id']), 'notes_id' => self::getSession(['note', 'id']), 'title' => self::getSession(['note', 'title']), 'description' => self::getSession(['note', 'description']), 'keywords' => self::getSession(['note', 'keywords']), 'attachment' => self::getSession(['note', 'attachment'])]);
 
     // clear note from session
     $this->removeSession('note');
