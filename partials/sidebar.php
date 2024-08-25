@@ -29,8 +29,13 @@
       </div>
       <!-- Load More Button -->
       <?php if ($page * $perPage < $totalNotes): ?>
-        <div class="text-center mt-6">
-          <button id="loadMoreBtnLeft" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+        <div class="text-center mt-6 flex justify-center">
+          <?php if ($page > 1): ?>
+            <button id="navigateHome" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 mr-auto mx-auto ml-6">
+              Go Home
+            </button>
+          <?php endif ?>
+          <button id="loadMoreBtnLeft" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 mr-6">
             Load More
           </button>
         </div>
@@ -45,10 +50,18 @@
   <!-- JavaScript for Load More Button -->
   <script>
     const loadMoreBtnLeft = document.getElementById('loadMoreBtnLeft');
+    const navigateHome = document.getElementById("navigateHome");
+
     if (loadMoreBtnLeft) {
       loadMoreBtnLeft.addEventListener('click', function() {
         const currentPage = <?= $page ?>;
         window.location.href = `?page=${currentPage + 1}`;
+      });
+    }
+
+    if (navigateHome) {
+      navigateHome.addEventListener('click', function() {
+        window.location.href = `?page=1`;
       });
     }
   </script>

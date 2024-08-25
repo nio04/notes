@@ -13,6 +13,6 @@ Router::dispatch();
 // unset($_SESSION["user"]);
 // unset($_SESSION["message"]);
 
-echo ("<pre>");
-var_dump($_SESSION);
-echo ("</pre>");
+// echo ("<pre>");
+// var_dump($_SESSION);
+// echo ("</pre>");
