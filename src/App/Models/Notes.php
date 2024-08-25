@@ -85,6 +85,15 @@ class Notes {
     return self::query("SELECT id, notes_id, title, created_at FROM old_notes WHERE notes_id = :notes_id AND id != :id ORDER BY created_at DESC  LIMIT $limit OFFSET $offset", $data);
   }
 
+  static function noteSearch($query) {
+    $data = ['title' => "%$query%"];
+    return self::query("SELECT title, id FROM notes WHERE title LIKE :title", $data);
+  }
+  static function noteSearchCount($query) {
+    $data = ['title' => "%$query%"];
+    return self::query("SELECT SUM(user_id) AS total FROM notes WHERE title LIKE :title GROUP BY user_id", $data);
+  }
+
   static function calculateTotalPage() {
     $data = ['user_id' => self::getSession(['user', 'id'])];
 

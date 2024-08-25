@@ -9,6 +9,7 @@ use App\Controllers\LogoutController;
 use App\Controllers\NoteController;
 use App\Controllers\NoteCreateController;
 use App\Controllers\NoteDeleteController;
+use App\Controllers\NoteSearchController;
 use App\Controllers\NoteUpdateController;
 use App\Controllers\NoteViewController;
 
@@ -123,6 +124,12 @@ class Router {
     self::$routes['/notes/upload'] = [
       'controller' => NoteUpdateController::class,
       'action' => 'upload',
+      'httpMethod' => 'post'
+    ];
+
+    self::$routes['/notes/search'] = [
+      'controller' => NoteSearchController::class,
+      'action' => 'search',
       'httpMethod' => 'post'
     ];
   }

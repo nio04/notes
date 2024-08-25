@@ -28,6 +28,7 @@ class Controller extends View {
 
     $this->isLoggedIn = $this->hasSession('user');
     $this->isHomepage = $_SERVER['REQUEST_URI'] === "/" ? true : false;
+    $this->isHomepage = ($_SERVER['REQUEST_URI'] === "/") || ($_SERVER['REQUEST_URI'] === "/notes/search") ? true : false;
     $this->username = $this->getSession(['user', 'username']);
     $this->profile_picture = $this->getSession(['user', 'profile_picture']);
     $this->shortNotes = $notes->getShortNotes($this->getSession(['user', 'id']), $this->limit, $this->offset);
