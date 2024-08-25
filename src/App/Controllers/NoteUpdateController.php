@@ -41,6 +41,13 @@ class NoteUpdateController extends Controller {
     // sanitize
     list($title, $description, $keywords) = $this->sanitize([$title, $description, $keywords]);
 
+    // check if the title already exist
+    $titleExist = Notes::getTitle($title, $user_id = self::getSession(['user', 'id']));
+
+    if ($titleExist) {
+      return $this->render('noteUpdate', ['errors' => ['this title is already in use!'], 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+    }
+
     // check if note Updated
     $contentUpdated =  $this->checkIfUdated($title, $description, $keywords);
 
