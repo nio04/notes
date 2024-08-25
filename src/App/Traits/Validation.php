@@ -54,18 +54,18 @@ trait Validation {
    * $fields = ['name' => 'John', 'email' => ''];
    * $required = ['name', 'email'];
    * $result = $this->isEmpty($fields, $required);
-   * // Result: ["The field 'email' cannot be empty."]
+   * // Result: ["The field 'email' cannot be empty."] 
    */
   public function isEmpty(array $fields, array $requiredFields = []) {
     $errors = [];
 
     foreach ($requiredFields as $field) {
       if (!array_key_exists($field, $fields) || empty(trim($fields[$field]))) {
-        $errors[] = "The field '{$field}' cannot be empty.";
+        $errors[$field] = "The field {$field} cannot be empty.";
       }
     }
 
-    return empty($errors) ? $fields : $errors;
+    return empty($errors) ? false : $errors;
   }
 
   /**

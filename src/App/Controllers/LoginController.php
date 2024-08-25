@@ -26,7 +26,7 @@ class LoginController extends Controller {
     $requiredFields = ['username', 'password'];
     $isEmpty = $this->isEmpty(['username' => $username, 'password' => $password], $requiredFields);
 
-    if (is_array($isEmpty) && isset($isEmpty[0])) {
+    if (is_array($isEmpty)) {
       return $this->render("login", ['errors' => $isEmpty]);
     }
 
@@ -34,25 +34,27 @@ class LoginController extends Controller {
     $user = $user->getUserbyUsername($username);
 
     if (empty($user)) {
-      return $this->render("login", ['errors' => ['username or password is incorrect']]);
+      $errors['loginError'] = 'username or password is incorrect';
+      return $this->render("login", ['errors' => $errors]);
     }
 
     if (is_array($user)) {
       $passwordVerify = password_verify($password, $user[0]->password);
 
       if ($passwordVerify === true) {
-        // save the user in session 
-        $user = new User();
-        $user = $user->getUser($username);
+        $user = User::getUser($username);
 
+        // save the user in session 
         $this->setSession(['user'], $user[0]);
 
         redirect("notes");
       } else {
-        return $this->render("login", ['errors' => ['username or password is incorrect']]);
+        $errors['loginError'] = 'username or password is incorrect';
+        return $this->render("login", ['errors' => $errors]);
       }
     } else {
-      return $this->render("login", ['errors' => ['something went wrong']]);
+      $errors['loginError'] = 'something went wrong';
+      return $this->render("login", ['errors' => $errors]);
     }
   }
 }
