@@ -26,8 +26,7 @@
     <!-- Logout button if the user is logged in -->
     <?php if ($isLoggedIn): ?>
       <a href="/logout"
-        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-        onclick="return confirm('Are you sure you want to delete this?');">
+        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
         Logout
       </a>
     <?php endif; ?>

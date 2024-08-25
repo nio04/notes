@@ -10,7 +10,7 @@ class User {
   static function getUser($username) {
     $data = ['username' => $username];
 
-    return self::query('SELECT id, username, profile_picture FROM users WHERE username = :username', $data);
+    return self::query('SELECT id, username, profile_picture, password FROM users WHERE username = :username', $data);
   }
 
   static function getUserbyUsername($username) {

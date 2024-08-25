@@ -71,6 +71,12 @@ class Router {
       'action' => 'index',
       'httpMethod' => 'get'
     ];
+    self::$routes['/logout/submit'] = [
+      'controller' => LogoutController::class,
+      'action' => 'logout',
+      'httpMethod' => 'post'
+    ];
+
     // Authentication routes [register]
     self::$routes['/register'] = [
       'controller' => RegisterController::class,
