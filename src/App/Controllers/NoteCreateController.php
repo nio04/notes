@@ -57,5 +57,6 @@ class NoteCreateController extends Controller {
     Notes::upload(['user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment['name']]);
 
     redirect("");
+    // return $this->render("noteView", ['isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
   }
 }

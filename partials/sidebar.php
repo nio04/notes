@@ -8,14 +8,6 @@
     </div>
   <?php endif ?>
 
-  <?php
-
-  echo ("<pre>");
-  var_dump($page);
-  echo ("</pre>");
-
-  ?>
-
   <!-- Notes Section -->
   <div class="overflow-y-auto row-start-2 row-end-3 mb-32">
     <?php if (!empty($notes)): ?>

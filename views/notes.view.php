@@ -9,6 +9,6 @@
   <?php loadPartials("sidebar", ['notes' => $notes ?? [], 'isNoteCreatePage' => $isNoteCreatePage, 'page' => $page, 'perPage' => $perPage, 'totalNotes' => $totalNotes]) ?>
 
   <!-- Right Content Area  -->
-  <div class="ml-auto w-2/3 bg-white p-6 pb-6"> </div>
+  <div class="ml-auto w-2/3 bg-white p-6 pb-6 h-screen"> </div>
   <?php loadPartials("footer") ?>
 </div>
