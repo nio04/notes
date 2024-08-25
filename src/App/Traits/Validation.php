@@ -88,23 +88,21 @@ trait Validation {
 
     foreach ($validateFields as $fieldName => $details) {
       $value = $details['data'] ?? null;
-      $method = $details['validateMethod'] ?? 'stringValidate'; // Default to 'stringValidate'
+      $method = $details['validateMethod'] ?? 'stringValidate';
       $customRules = $details['rules'] ?? [];
 
       if (method_exists($this, $method)) {
         $result = $this->$method($value, $customRules);
 
         if ($result === false) {
-          $errors[] = $this->getCustomErrorMessage($fieldName, $value, $customRules, $method);
+          $errors[$fieldName] = $this->getCustomErrorMessage($fieldName, $value, $customRules, $method);
         } else {
           $validatedData[$fieldName] = $result;
         }
-      } else {
-        $errors[] = "No validation method found for '{$method}' for field '{$fieldName}'.";
       }
     }
 
-    return empty($errors) ? $validatedData : $errors;
+    return empty($errors) ? false : $errors;
   }
 
   /**
@@ -210,11 +208,11 @@ trait Validation {
     $errors = [];
 
     $user = new User();
-    $user->getUsername($datas['username']) ?  $errors[] = 'username already found' : [];
+    $user->getUsername($datas['username']) ?  $errors['username'] = 'username already found' : [];
 
-    $user->getEmail($datas['email']) ?  $errors[] = 'email already found' : [];
+    $user->getEmail($datas['email']) ?  $errors['email'] = 'email already found' : [];
 
-    $user->getMobile($datas['mobile']) ? $errors[] = 'mobile number already found' : [];
+    $user->getMobile($datas['mobile']) ? $errors['mobile'] = 'mobile number already found' : [];
 
     return empty($errors) ? false : $errors;
   }
@@ -287,22 +285,22 @@ trait Validation {
       case 'stringValidate':
         $minLength = $rules['min_length'] ?? 3;
         $maxLength = $rules['max_length'] ?? 30;
-        return "The '{$field}' field must be between {$minLength} and {$maxLength} characters long.";
+        return "The {$field} field must be between {$minLength} and {$maxLength} characters long.";
 
       case 'digitValidate':
-        return "The '{$field}' field must contain only digits.";
+        return "The {$field} field must contain only digits.";
 
       case 'mobileValidate':
-        return "The '{$field}' field must be a valid mobile number.";
+        return "The {$field} field must be a valid mobile number.";
 
       case 'emailValidate':
-        return "The '{$field}' field must be a valid email address.";
+        return "The {$field} field must be a valid email address.";
 
       case 'passwordValidate':
-        return "The '{$field}' field must contain only valid characters (letters, digits, _ + . @).";
+        return "The {$field} field must contain only valid characters (letters, digits, _ + . @).";
 
       default:
-        return "The '{$field}' field is invalid.";
+        return "The {$field} field is invalid.";
     }
   }
 }

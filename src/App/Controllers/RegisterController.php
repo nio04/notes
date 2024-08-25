@@ -27,18 +27,18 @@ class RegisterController extends Controller {
     // sanitize
     list($firstName, $lastName, $username, $email, $dob, $mobile, $password, $passwordConfirm) = $this->sanitize([$firstName, $lastName, $username, $email, $dob, $mobile, $password, $passwordConfirm]);
 
-    // check if empty
+    // check if empty - username, email, password
     $requiredFields = ['username', 'email', 'password'];
     $isEmpty = $this->isEmpty(['username' => $username, 'email' => $email, 'password' => $password], $requiredFields);
 
-    if (is_array($isEmpty) && isset($isEmpty[0])) {
-      return $this->render("register", ['errors' => $isEmpty, 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
+    if (is_array($isEmpty)) {
+      return $this->render("register", ['errors' => $isEmpty, 'first_name' => $firstName, 'last_name' => $lastName, 'mobile' => $mobile, 'username' => $username, 'email' => $email]);
     }
 
     // validate --> first name, last name, username, email, mobile, password, password confirm 
     $validateFields = $this->validateField(['first_name' => ['data' => $firstName, 'validateMethod' => 'stringValidate', 'rules' => ['min_length' => 4, 'max_length' => 10]], 'last_name' => ['data' => $lastName, 'validateMethod' => 'stringValidate', 'rules' => ['min_length' => 4, 'max_length' => 10]], 'username' => ['data' => $username, 'validateMethod' => 'stringValidate', 'rules' => ['min_length' => 4, 'max_length' => 30]], 'email' => ['data' => $email, 'validateMethod' => 'emailValidate'], 'mobile' => ['data' => $mobile, 'validateMethod' => 'digitValidate', 'rules' => ['min_length' => 10, 'max_length' => 11]], 'password' => ['data' => $password, 'validateMethod' => 'passwordValidate', 'rules' => ['min_length' => 6, 'max_length' => 30]], 'password_confirm' => ['data' => $passwordConfirm, 'validateMethod' => 'passwordValidate', 'rules' => ['min_length' => 6, 'max_length' => 30]]]);
 
-    if (is_array($validateFields) && isset($validateFields[0])) {
+    if (is_array($validateFields)) {
       return $this->render("register", ['errors' => $validateFields, 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
     }
 
@@ -46,7 +46,9 @@ class RegisterController extends Controller {
     $passwordMatches = $this->passwordMatches($password, $passwordConfirm);
 
     if ($passwordMatches === false) {
-      return $this->render("register", ['errors' => ['password did not matched, please try again'], 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
+      $errors['registerError'] = 'password did not matched, please try again';
+
+      return $this->render("register", ['errors' => $errors, 'first_name' => $firstName, 'last_name' => $lastName, 'username' => $username, 'email' => $email, 'mobile' => $mobile]);
     }
 
     // validate & move profile picture
