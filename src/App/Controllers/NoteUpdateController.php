@@ -56,7 +56,6 @@ class NoteUpdateController extends Controller {
       return $this->render('noteUpdate', ['errors' => $errors, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
-
     // upload to table [curren(new)note]
     Notes::save(['id' => (int)$id, 'user_id' => self::getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);
 
@@ -70,6 +69,7 @@ class NoteUpdateController extends Controller {
     $singleNote = Notes::getNote($id);
     $oldNotes = Notes::getOldNotes($id, $id, $this->limit, $this->offset);
 
-    return $this->render("noteView", ['viewingOldNote' => false, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'note' => $singleNote[0] ?? [], 'isNoteCreatePage' => $this->isNoteCreatePage, 'oldNotes' => $oldNotes ?? [], 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+
+    redirect("");
   }
 }
