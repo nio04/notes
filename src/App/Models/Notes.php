@@ -33,9 +33,9 @@ class Notes {
    * @param string $title
    * @return mixed
    */
-  static function getTitle(string $title) {
-    $data = ['title' => $title];
-    return self::query("SELECT title FROM notes WHERE title = :title", $data);
+  static function getTitle(string $title, $user_id) {
+    $data = ['title' => $title, 'user_id' => $user_id];
+    return self::query("SELECT title FROM notes WHERE title = :title AND user_id = :user_id", $data);
   }
 
   /**
