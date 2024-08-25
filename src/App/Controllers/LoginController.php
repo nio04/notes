@@ -12,7 +12,7 @@ class LoginController extends Controller {
   use Session;
 
   function index() {
-    $this->render("login");
+    return $this->render("login");
   }
 
   function submit() {

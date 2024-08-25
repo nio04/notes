@@ -50,7 +50,7 @@ class NoteCreateController extends Controller {
     $titleExist = Notes::getTitle($title);
 
     if ($titleExist) {
-      return $this->render('noteCreate', ['errors' => ['this title is already in use!'], 'isLoggedIn' => $this->isLoggedIn, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+      return $this->render('noteCreate', ['errors' => ['this title is already in use!'], 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
     // insert to table
