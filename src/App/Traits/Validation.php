@@ -220,14 +220,14 @@ trait Validation {
   /**
    * check if note update valid
    */
-  function checkIfUdated($title, $description, $keywords) {
+  function checkIfUpdated($title, $description, $keywords) {
     $errors = [];
     $oldTitle = $this->getSession(['note', 'title']);
     $oldDescription = $this->getSession(['note', 'description']);
     $oldKeywords = $this->getSession(['note', 'keywords']);
 
     if ($title === $oldTitle && $description === $oldDescription && $keywords === $oldKeywords)
-      $errors[] = "no changes were made. unable to upload the edit.";
+      $errors['noteUpdateError'] = "no changes were made. unable to upload the note.";
 
     return empty($errors) ? false : $errors;
   }

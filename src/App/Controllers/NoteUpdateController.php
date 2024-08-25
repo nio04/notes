@@ -41,19 +41,21 @@ class NoteUpdateController extends Controller {
     // sanitize
     list($title, $description, $keywords) = $this->sanitize([$title, $description, $keywords]);
 
+    // check if note Updated
+    $contentUpdated =  $this->checkIfUpdated($title, $description, $keywords);
+
+    if (is_array($contentUpdated)) {
+      return $this->render("noteUpdate", ['errors' => $contentUpdated, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+    }
+
     // check if the title already exist
     $titleExist = Notes::getTitle($title, $user_id = self::getSession(['user', 'id']));
 
     if ($titleExist) {
-      return $this->render('noteUpdate', ['errors' => ['this title is already in use!'], 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+      $errors['noteUpdateError'] = 'this title is already in use!';
+      return $this->render('noteUpdate', ['errors' => $errors, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'title' => $title, 'isNoteCreatePage' => $this->isNoteCreatePage, 'profile_picture' => $this->profile_picture, 'notes' => $this->shortNotes, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
     }
 
-    // check if note Updated
-    $contentUpdated =  $this->checkIfUdated($title, $description, $keywords);
-
-    if (is_array($contentUpdated)  && isset($contentUpdated[0])) {
-      return $this->render("noteUpdate", ['errors' => $contentUpdated, 'isLoggedIn' => $this->isLoggedIn, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'notes' => $this->shortNotes, 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
-    }
 
     // upload to table [curren(new)note]
     Notes::save(['id' => (int)$id, 'user_id' => $this->getSession(['user', 'id']), 'title' => $title, 'description' => $description, 'keywords' => $keywords, 'attachment' => $attachment]);

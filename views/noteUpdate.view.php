@@ -18,7 +18,10 @@
       <!-- Update Note Form -->
       <form action="/notes/upload" method="post">
 
-        <?php loadPartials("errors", ['errors' => $errors ?? []]) ?>
+        <?php if (!empty($errors['noteUpdateError'])): ?>
+          <p class="text-red-500 text-sm mt-2 mb-6"><?php echo $errors['noteUpdateError']; ?></p>
+        <?php endif; ?>
+
 
         <input type="hidden" name="id" value="<?= $id ?>">
 
