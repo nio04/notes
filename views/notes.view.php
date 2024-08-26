@@ -9,7 +9,7 @@
   <?php loadPartials("sidebar", ['notes' => $notes ?? [], 'isNoteCreatePage' => $isNoteCreatePage, 'page' => $page, 'perPage' => $perPage, 'totalNotes' => $totalNotes]) ?>
 
   <!-- Right Content Area -->
-  <div class="ml-auto w-2/3 bg-white p-6 pb-6 h-screen">
+  <div class="ml-auto w-2/3 bg-white">
 
 
     <!-- show alert message -->
@@ -21,15 +21,13 @@
       ?>
     <?php endif; ?>
 
-
-
     <?php if (!empty($query) && !empty($noteSearch)): ?>
       <!-- Search Results Found Section -->
       <div class="mb-6">
 
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Search Results Found: <?= number_format($noteSearchCount) ?></h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 pt-8 ml-6">Search Results Found: <?= number_format($noteSearchCount) ?></h2>
         <!-- Search Results Container -->
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 mx-6">
           <?php foreach ($noteSearch as $note): ?>
             <a href="/notes/view/<?= htmlspecialchars($note->id); ?>" class="block p-4 bg-gray-100 hover:bg-gray-200 rounded-lg text-blue-600">
               <?= htmlspecialchars($note->title); ?>

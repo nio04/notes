@@ -25,7 +25,7 @@ class Notes {
   static function getNote($id) {
     $data = ["id" => (int) $id];
 
-    return self::query("SELECT * FROM notes WHERE id = :id ORDER BY created_at DESC", $data);
+    return self::query("SELECT * FROM notes WHERE id = :id", $data);
   }
 
   /**
