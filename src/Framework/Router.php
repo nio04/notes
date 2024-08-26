@@ -136,7 +136,7 @@ class Router {
     self::$routes['/notes/search'] = [
       'controller' => NoteSearchController::class,
       'action' => 'search',
-      'httpMethod' => 'post'
+      'httpMethod' => 'get'
     ];
   }
 

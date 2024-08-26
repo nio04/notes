@@ -20,7 +20,7 @@ class NoteSearchController extends Controller {
   }
 
   function search() {
-    $query = $_POST['query'];
+    $query = $_GET['query'];
 
     // sanitize
     $query = self::sanitize($query);
@@ -35,5 +35,7 @@ class NoteSearchController extends Controller {
     $noteSearchResults = Notes::noteSearchCount($query);
 
     return $this->render("notes", ['isLoggedIn' => $this->isLoggedIn, 'isHomepage' => $this->isHomepage, 'username' => $this->username, 'profile_picture' => $this->profile_picture, 'isNoteCreatePage' => $this->isNoteCreatePage, 'query' => $query, 'notes' => $this->shortNotes, 'noteSearch' => $noteSearch, 'noteSearchCount' => $noteSearchResults[0]->total ?? "", 'page' => $this->page, 'perPage' => $this->limit, 'totalNotes' => $this->totalNotes]);
+
+    // redirect('');
   }
 }

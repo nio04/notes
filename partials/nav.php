@@ -7,8 +7,8 @@
   <!-- Search Bar (only on homepage) -->
   <?php if ($isHomepage ?? ""): ?>
     <div class=" mx-auto">
-      <form action="/notes/search" method="POST" class="relative">
-        <input type="text" name="query" placeholder="Search..." class="w-80 px-8 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="<?= $query ?? "" ?>">
+      <form action="/notes/search" method="GET" class="relative">
+        <input type="text" name="query" placeholder="Search..." class="w-80 px-8 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="<?= htmlspecialchars($_GET['query'] ?? "") ?>">
         <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-400 text-white font-semibold px-3 py-1 rounded-lg hover:bg-green-500">
           Search
         </button>
